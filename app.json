@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Kip",
+    "description": "This project is really great.",
+    "slug": "kip-expo",
+    "privacy": "public",
+    "sdkVersion": "28.0.0",
+    "platforms": ["ios", "android"],
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./logo.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.andrewmundy.kip"
+    },
+    "android": {
+      "package": "com.andrewmundy.kip"
+    }
+  }
+}
