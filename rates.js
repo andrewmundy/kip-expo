@@ -264,6 +264,7 @@ const ratesPacket = {
       "currencyId": "SEK",
       "currencyName": "Swedish krona",
       "currencySymbol": "kr",
+      "emoji":"🇸🇪",
       "id": "SE",
       "name": "Sweden"
     },
@@ -459,6 +460,7 @@ const ratesPacket = {
       "currencyId": "LAK",
       "currencyName": "Lao kip",
       "currencySymbol": "₭",
+      "emoji":"🇱🇦",
       "id": "LA",
       "name": "Laos"
     },
@@ -748,6 +750,7 @@ const ratesPacket = {
       "currencyId": "JPY",
       "currencyName": "Japanese yen",
       "currencySymbol": "¥",
+      "emoji": "🇯🇵",
       "id": "JP",
       "name": "Japan"
     },
@@ -911,6 +914,7 @@ const ratesPacket = {
       "currencyId": "USD",
       "currencyName": "United States dollar",
       "currencySymbol": "$",
+      "emoji": "🇺🇸",
       "id": "US",
       "name": "United States of America"
     },
@@ -919,6 +923,7 @@ const ratesPacket = {
       "currencyId": "VND",
       "currencyName": "Vietnamese dong",
       "currencySymbol": "₫",
+      "emoji": "🇻🇳",
       "id": "VN",
       "name": "Vietnam"
     },
@@ -1019,6 +1024,7 @@ const ratesPacket = {
       "currencyId": "EUR",
       "currencyName": "European euro",
       "currencySymbol": "€",
+      "emoji": "🇫🇷",
       "id": "FR",
       "name": "France"
     },
@@ -1027,6 +1033,7 @@ const ratesPacket = {
       "currencyId": "EUR",
       "currencyName": "European euro",
       "currencySymbol": "€",
+      "emoji": "🇩🇪",
       "id": "DE",
       "name": "Germany"
     },
@@ -1051,6 +1058,7 @@ const ratesPacket = {
       "currencyId": "IDR",
       "currencyName": "Indonesian rupiah",
       "currencySymbol": "Rp",
+      "emoji": "🇮🇩",
       "id": "ID",
       "name": "Indonesia"
     },
@@ -1105,6 +1113,7 @@ const ratesPacket = {
       "currencyId": "MXN",
       "currencyName": "Mexican peso",
       "currencySymbol": "$",
+      "emoji": "🇲🇽",
       "id": "MX",
       "name": "Mexico"
     },
@@ -1209,6 +1218,7 @@ const ratesPacket = {
       "currencyId": "THB",
       "currencyName": "Thai baht",
       "currencySymbol": "฿",
+      "emoji": "🇹🇭",
       "id": "TH",
       "name": "Thailand"
     },

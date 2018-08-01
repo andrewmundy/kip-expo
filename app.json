@@ -1,17 +1,17 @@
 {
   "expo": {
     "name": "Kip",
-    "description": "This project is really great.",
+    "description": "Location Aware Conversions!",
     "slug": "kip-expo",
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],
-    "version": "0.1.0",
+    "version": "0.3.0",
     "orientation": "portrait",
     "icon": "./logo.png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./splash.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -22,10 +22,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.andrewmundy.kip"
+      "bundleIdentifier": "com.andrewmundy.kiip"
     },
     "android": {
-      "package": "com.andrewmundy.kip"
+      "package": "com.andrewmundy.kiip"
     }
   }
 }
