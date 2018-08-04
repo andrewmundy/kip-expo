@@ -81,6 +81,9 @@ export default class App extends React.Component {
       console.log(error);
     }
   };
+  componentDidMount(){
+    this.from.focus();
+  };
 
   componentWillMount(){
     this.updateCurrencyPacket()
@@ -235,6 +238,7 @@ export default class App extends React.Component {
       });
     });
     this.changePosition(this.state[this.state.whichModal])
+    this.from.focus();
   };
 
   _handlePressOpenTo = () => {
@@ -319,22 +323,24 @@ export default class App extends React.Component {
           <View style={styles.inputs}>
             <Text style={{fontSize: 24 }}></Text>
             <TextInput
+              ref={(input) => { this.from = input; }} 
               autofocus='true'
               keyboardType='number-pad'
-              returnKeyType = 'done'
+              // returnKeyType = 'done'
               style={styles.currencyOutput}
               onChangeText={(fromValue) => this.fromMath(fromValue)}
               value={this.state.fromValue}
-              selectTextOnFocus
-              keyboardAppearance="dark"
+              // selectTextOnFocus
+              keyboardAppearance='dark'
+              backgroundColor = '#333'
+              clearButtonMode = 'always'
             />
-            
-            </View>
+          </View>
             
           <View style={styles.inputs}>
-            <Button style={styles.countryCurrency} title={this.state.fromCountryCurrency} onPress={this._handlePressOpenFrom} />
-            <Button style={styles.countryCurrency} title='🔁' onPress={this.swapCountry} />
-            <Button style={styles.countryCurrency} title={this.state.toCountryCurrency} onPress={this._handlePressOpenTo} />
+            <Button style={styles.buttons} color='rgba(121, 131, 254, 1)' title={this.state.fromCountryCurrency} onPress={this._handlePressOpenFrom} />
+            <Button style={styles.buttons} title='🔁' onPress={this.swapCountry} />
+            <Button style={styles.buttons} color='rgba(121, 131, 254, 1)' title={this.state.toCountryCurrency} onPress={this._handlePressOpenTo} />
           </View>
           
           <Text style={{width:'100%', textAlign:'center', 'color':'grey'}}>Last Updated {this.state.backup}</Text>
@@ -377,10 +383,10 @@ export default class App extends React.Component {
             </View>
           </View>
           <Picker
-            style={{ width: WindowWidth, backgroundColor: '#e1e1e1' }}
+            style={{ width: WindowWidth, backgroundColor: '#555' }}
             selectedValue={this.state[whichMode]}
             onValueChange={itemValue => this.setState({ [whichMode]: itemValue })}>
-            <Picker.Item label="United States 🇺🇸" value="US" />
+            <Picker.Item label="United States 🇺🇸" value="US"/>
             <Picker.Item label="Thailand 🇹🇭" value="TH" />
             <Picker.Item label="Sweden 🇸🇪" value="SE" />
             <Picker.Item label="Vietnam 🇻🇳" value="VN" />
@@ -413,14 +419,10 @@ const styles = StyleSheet.create({
     paddingTop:30,
     width:'100%',
     padding:15,
-    // backgroundColor:'rgba(255,255,255,0.5)'
   },
   container: {
-    // flex: 1,
     height:'100%',
-    backgroundColor: 'white',
-    // alignItems: 'center',
-    // justifyContent: 'space-around',
+    backgroundColor: 'black',
   },
   pin:{
     position:'absolute',
@@ -443,8 +445,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
     color:'grey',
-    padding: 10,
-    fontSize: 13
+    padding: 10
   },
   equals:{
     paddingLeft:15,
@@ -458,24 +459,25 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'center',
     alignItems:'center',
-    width:'100%'
+    width:'100%',
   },
   currencyOutput: {
     flex:1,
     fontSize:18,
     padding: 10, 
-    borderColor: 'rgba(121, 131, 254, .5)',
+    borderColor: 'rgba(121, 131, 254, 1)',
     // borderColor: 'lightgrey',
     borderWidth: 1,
     backgroundColor:'white',
-    borderRadius:5
+    borderRadius:5,
+    color:'white',
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0,0,0,0.65)',
   },
   toolbar: {
-    backgroundColor: '#f1f1f1',
+    backgroundColor: '#000000',
     paddingVertical: 5,
     paddingHorizontal: 15,
   },
