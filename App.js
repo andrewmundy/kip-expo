@@ -19,6 +19,7 @@ import {
 import { LinearGradient } from 'expo';
 import ratesPacket from './rates.js';
 import currencyPacket from './currency.js';
+import swap from './swap.png';
 
 const { width: WindowWidth } = Dimensions.get('window');
 
@@ -56,7 +57,8 @@ export default class App extends React.Component {
       offlineMode:false,
       allCountryCodes:"",
       backup:'',
-      currencyPacket:currencyPacket
+      currencyPacket:currencyPacket,
+      currentLocation:''
     }
   }
 
@@ -102,9 +104,11 @@ export default class App extends React.Component {
     await fetch(url)
     .then((resp) => resp.json())
     .then(function (data) {
+      console.log(data.results[0].address_components[0].short_name)
       that.setState({
         fromCountryName: data.results[0].address_components[0].long_name,
-        fromCountryCode: data.results[0].address_components[0].short_name
+        fromCountryCode: data.results[0].address_components[0].short_name,
+        currentLocation: data.results[0].address_components[0].short_name
       })
     }).catch(function(){
     })
@@ -196,7 +200,15 @@ export default class App extends React.Component {
   };
 
   changePosition(country){
+    let whichMode = this.state.whichModal
+    if(country === 'CRL'){
+      this.setState({
+        [whichMode]:this.state.currentLocation
+      })
     this.countryFromCountryCode(country)
+    } else {
+      this.countryFromCountryCode(country)
+    }
   };
 
   swapCountry = () => {
@@ -205,6 +217,7 @@ export default class App extends React.Component {
     this.setState({
       toCountryCode: this.state.fromCountryCode,
       fromCountryCode: placeholder,
+      toValue: 1
     })
     this.countryFromCountryCode()
   }
@@ -223,6 +236,14 @@ export default class App extends React.Component {
       toValue: newValue.toFixed(2),
       fromValue: x
     })
+  };
+
+  countryEmoji(x){
+    if (!this.state[x]) {
+      return " "
+    } else {
+      return this.state[x]
+    }
   };
 
   // HANDLEPRESS /\
@@ -280,7 +301,6 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container} >
-
         <Image
           id="map"
           style={{ 
@@ -288,63 +308,48 @@ export default class App extends React.Component {
             flex: 1,
             position: 'absolute',
             width: '100%',
-            height: 250,
+            height: 340,
             justifyContent: 'center',
           }}
           source={{ uri: this.state.map }}
           blurRadius={2}
         />
-        
-        
+
         <LinearGradient 
-        colors = {['rgba(121, 131, 254, .8))', 'rgba(255, 10, 254, 0.2)']}
-        style={styles.sentence}
+          colors = {['rgba(121, 131, 254, .8))', 'rgba(255, 10, 254, 0.2)']}
+          style={styles.sentence}
         >
+          <TextInput
+            ref={(input) => { this.from = input; }} 
+            autofocus='true'
+            keyboardType='number-pad'
+            style={styles.currencyOutput}
+            onChangeText={(fromValue) => this.fromMath(fromValue)}
+            value={this.state.fromValue}
+            backgroundColor= 'none'
+            clearButtonMode = 'always'
+          />
           <Text style={styles.bold}>
-            { this.state.fromValue  + " " + this.state.fromCountryEmoji} {"\n"}
             <Text style={styles.subtext}>
-              {this.state.fromSymbol + " " + this.state.fromCountryCurrencyName} 
+              {this.state.fromSymbol + " " + this.state.fromCountryCurrencyName + " " + this.countryEmoji('fromCountryEmoji')} 
             </Text>
           </Text>
-          
           <Text style={styles.equals}>equals</Text>
-
           <Text style={styles.bold}>
-            {this.state.toValue + " " + this.state.toCountryEmoji}{"\n"}
+            {this.state.toValue}{"\n"}
             <Text style={styles.subtext}>
-              {this.state.toSymbol + " " + this.state.toCountryCurrencyName}
+              {this.state.toSymbol + " " + this.state.toCountryCurrencyName + " " + this.countryEmoji('toCountryEmoji')}
             </Text>
           </Text>
-
           <Text style={styles.pin}> 🗺 {this.state.fromCountryName}</Text>
         </LinearGradient>
-
         <View style={styles.inputContainer}>
           <View style={styles.inputs}>
-            <Text style={{fontSize: 24 }}></Text>
-            <TextInput
-              ref={(input) => { this.from = input; }} 
-              autofocus='true'
-              keyboardType='number-pad'
-              // returnKeyType = 'done'
-              style={styles.currencyOutput}
-              onChangeText={(fromValue) => this.fromMath(fromValue)}
-              value={this.state.fromValue}
-              // selectTextOnFocus
-              keyboardAppearance='dark'
-              backgroundColor = '#333'
-              clearButtonMode = 'always'
-            />
-          </View>
-            
-          <View style={styles.inputs}>
             <Button style={styles.buttons} color='rgba(121, 131, 254, 1)' title={this.state.fromCountryCurrency} onPress={this._handlePressOpenFrom} />
-            <Button style={styles.buttons} title='🔁' onPress={this.swapCountry} />
+            <Button style={styles.buttons} title='🔄' onPress={this.swapCountry} />
             <Button style={styles.buttons} color='rgba(121, 131, 254, 1)' title={this.state.toCountryCurrency} onPress={this._handlePressOpenTo} />
           </View>
-          
           <Text style={{width:'100%', textAlign:'center', 'color':'grey'}}>Last Updated {this.state.backup}</Text>
-          
         </View>
         {this._maybeRenderModal()}
       </View>
@@ -383,19 +388,23 @@ export default class App extends React.Component {
             </View>
           </View>
           <Picker
-            style={{ width: WindowWidth, backgroundColor: '#555' }}
+            style={{ width: WindowWidth, backgroundColor: '#CACED6' }}
             selectedValue={this.state[whichMode]}
             onValueChange={itemValue => this.setState({ [whichMode]: itemValue })}>
+            <Picker.Item label="Current Location 📍" value="CRL"/>
             <Picker.Item label="United States 🇺🇸" value="US"/>
-            <Picker.Item label="Thailand 🇹🇭" value="TH" />
+            <Picker.Item label="Mexico 🇲🇽" value="MX" />
             <Picker.Item label="Sweden 🇸🇪" value="SE" />
-            <Picker.Item label="Vietnam 🇻🇳" value="VN" />
-            <Picker.Item label="Indonesia 🇮🇩" value="ID" />
             <Picker.Item label="France 🇫🇷" value="FR" />
             <Picker.Item label="Germany 🇩🇪" value="DE" />
-            <Picker.Item label="Japan 🇯🇵" value="JP" />
+            <Picker.Item label="Australia 🇦🇺" value="AU" />
+            <Picker.Item label="United Kingdom 🇬🇧" value="GB" />
+            <Picker.Item label="Canadian Dollar 🇨🇦" value="CA" />
+            <Picker.Item label="Thailand 🇹🇭" value="TH" />
             <Picker.Item label="Lao PDR 🇱🇦" value="LA" />
-            <Picker.Item label="Mexico 🇲🇽" value="MX" />
+            <Picker.Item label="Vietnam 🇻🇳" value="VN" />
+            <Picker.Item label="Indonesia 🇮🇩" value="ID" />
+            <Picker.Item label="Japan 🇯🇵" value="JP" />
           </Picker>
         </Animated.View>
       </View>
@@ -405,24 +414,24 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   subtext:{
     fontWeight: 'normal', 
-    fontSize: 20, 
+    fontSize: 25, 
     color: 'rgba(255,255,255,0.8)',
   },
   bold:{
     fontWeight: 'bold',
-    fontSize: 38,
+    fontSize: 50,
     color: 'white',
     padding:10
   },
   sentence:{
-    height:250,
-    paddingTop:30,
+    height:340,
+    paddingTop:50,
     width:'100%',
     padding:15,
   },
   container: {
     height:'100%',
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
   pin:{
     position:'absolute',
@@ -436,22 +445,23 @@ const styles = StyleSheet.create({
   },
   inputContainer:{
     position:'absolute',
-    top:260,
+    top:340,
     width:'100%'
   },
   countryCurrency:{
     width:'20%',
     textAlign: 'center',
-    fontSize: 40,
+    fontSize: 50,
     fontWeight: 'bold',
     color:'grey',
     padding: 10
   },
   equals:{
-    paddingLeft:15,
+    padding:10,
+    // margin:20,
     fontWeight: 'normal', 
     fontSize: 20, 
-    color: 'rgba(255,255,255,0.8)',
+    color: 'rgba(255,255,255,0.4)',
   },
   inputs:{
     padding:10,
@@ -462,14 +472,15 @@ const styles = StyleSheet.create({
     width:'100%',
   },
   currencyOutput: {
-    flex:1,
-    fontSize:18,
-    padding: 10, 
-    borderColor: 'rgba(121, 131, 254, 1)',
+    // flex:1,
+    fontSize:50,
+    fontWeight: 'bold',
+    paddingLeft: 10, 
+    // borderColor: 'rgba(121, 131, 254, 1)',
     // borderColor: 'lightgrey',
-    borderWidth: 1,
-    backgroundColor:'white',
-    borderRadius:5,
+    // borderWidth: 1,
+    // backgroundColor:'white',
+    // borderRadius:5,
     color:'white',
   },
   overlay: {
@@ -477,7 +488,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.65)',
   },
   toolbar: {
-    backgroundColor: '#000000',
+    backgroundColor: 'white',
     paddingVertical: 5,
     paddingHorizontal: 15,
   },
