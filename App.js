@@ -13,7 +13,8 @@ import {
   Button,
   TouchableWithoutFeedback,
   Dimensions,
-  Keyboard
+  Keyboard,
+  TouchableOpacity
 } from 'react-native';
 
 import { LinearGradient } from 'expo';
@@ -308,7 +309,7 @@ export default class App extends React.Component {
             flex: 1,
             position: 'absolute',
             width: '100%',
-            height: 340,
+            height: 400,
             justifyContent: 'center',
           }}
           source={{ uri: this.state.map }}
@@ -330,26 +331,39 @@ export default class App extends React.Component {
             clearButtonMode = 'always'
           />
           <Text style={styles.bold}>
-            <Text style={styles.subtext}>
-              {this.state.fromSymbol + " " + this.state.fromCountryCurrencyName + " " + this.countryEmoji('fromCountryEmoji')} 
+            <Text>
+             <TouchableOpacity style={styles.buttons} color='rgba(121, 131, 254, 1)' onPress={this._handlePressOpenFrom}>
+              <Text style={styles.subtext}>
+                {this.state.fromSymbol}
+                <Text style={styles.underline}>
+                  {this.state.fromCountryCurrencyName}
+                </Text>
+                {this.countryEmoji('fromCountryEmoji')}
+              </Text>
+             </TouchableOpacity>
             </Text>
           </Text>
-          <Text style={styles.equals}>equals</Text>
+
+          <Button style={styles.buttons} title='🔄' onPress={this.swapCountry} />
+
+          <Text style={styles.currencyOutput}>{this.state.toValue}</Text>
           <Text style={styles.bold}>
-            {this.state.toValue}{"\n"}
-            <Text style={styles.subtext}>
-              {this.state.toSymbol + " " + this.state.toCountryCurrencyName + " " + this.countryEmoji('toCountryEmoji')}
+            <Text>
+             <TouchableOpacity style={styles.buttons} color='rgba(121, 131, 254, 1)' onPress={this._handlePressOpenTo}>
+              <Text style={styles.subtext}>
+                {this.state.toSymbol}
+                <Text style={styles.underline}>
+                  {this.state.toCountryCurrencyName}
+                </Text>
+                {this.countryEmoji('toCountryEmoji')}
+              </Text>
+             </TouchableOpacity>
             </Text>
           </Text>
-          <Text style={styles.pin}> 🗺 {this.state.fromCountryName}</Text>
-        </LinearGradient>
+
+          </LinearGradient>
         <View style={styles.inputContainer}>
-          <View style={styles.inputs}>
-            <Button style={styles.buttons} color='rgba(121, 131, 254, 1)' title={this.state.fromCountryCurrency} onPress={this._handlePressOpenFrom} />
-            <Button style={styles.buttons} title='🔄' onPress={this.swapCountry} />
-            <Button style={styles.buttons} color='rgba(121, 131, 254, 1)' title={this.state.toCountryCurrency} onPress={this._handlePressOpenTo} />
-          </View>
-          <Text style={{width:'100%', textAlign:'center', 'color':'grey'}}>Last Updated {this.state.backup}</Text>
+          <Text style={{width:'100%', textAlign:'center', 'color':'grey', 'padding':20}}>Last Updated {this.state.backup}</Text>
         </View>
         {this._maybeRenderModal()}
       </View>
@@ -412,19 +426,24 @@ export default class App extends React.Component {
   };
 }
 const styles = StyleSheet.create({
+  underline:{
+    textDecorationLine:'underline',
+    padding:10,
+  },
   subtext:{
     fontWeight: 'normal', 
-    fontSize: 25, 
+    fontSize: 22, 
+    margin:10,
     color: 'rgba(255,255,255,0.8)',
   },
   bold:{
     fontWeight: 'bold',
-    fontSize: 50,
+    fontSize: 60,
     color: 'white',
     padding:10
   },
   sentence:{
-    height:340,
+    height:400,
     paddingTop:50,
     width:'100%',
     padding:15,
@@ -445,7 +464,7 @@ const styles = StyleSheet.create({
   },
   inputContainer:{
     position:'absolute',
-    top:340,
+    top:400,
     width:'100%'
   },
   countryCurrency:{
