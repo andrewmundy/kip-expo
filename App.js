@@ -17,10 +17,17 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import {
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded
+} from 'expo';
+
 import { LinearGradient } from 'expo';
 import ratesPacket from './rates.js';
 import currencyPacket from './currency.js';
-import swap from './swap.png';
+import swapImg from './swap.png';
 
 const { width: WindowWidth } = Dimensions.get('window');
 
@@ -171,7 +178,7 @@ export default class App extends React.Component {
 
   coordToCountry() {
     this.setState({
-      map: "https://maps.googleapis.com/maps/api/staticmap?center=" + this.state.latitude + "," + this.state.longitude + "&zoom=13&size=400x500&sensor=false&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE"
+      map: "https://maps.googleapis.com/maps/api/staticmap?center=" + this.state.latitude + "," + this.state.longitude + "&zoom=10&size=350x450&sensor=false&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0x1d2c4d&style=element:labels.text.fill%7Ccolor:0x8ec3b9&style=element:labels.text.stroke%7Ccolor:0x1a3646&style=feature:administrative.country%7Celement:geometry.stroke%7Ccolor:0x4b6878&style=feature:administrative.land_parcel%7Celement:labels.text.fill%7Ccolor:0x64779e&style=feature:administrative.province%7Celement:geometry.stroke%7Ccolor:0x4b6878&style=feature:landscape.man_made%7Celement:geometry.stroke%7Ccolor:0x334e87&style=feature:landscape.natural%7Celement:geometry%7Ccolor:0x023e58&style=feature:poi%7Celement:geometry%7Ccolor:0x283d6a&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x6f9ba5&style=feature:poi%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:poi.park%7Celement:geometry.fill%7Ccolor:0x023e58&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x3C7680&style=feature:road%7Celement:geometry%7Ccolor:0x304a7d&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x98a5be&style=feature:road%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:road.highway%7Celement:geometry%7Ccolor:0x2c6675&style=feature:road.highway%7Celement:geometry.stroke%7Ccolor:0x255763&style=feature:road.highway%7Celement:labels.text.fill%7Ccolor:0xb0d5ce&style=feature:road.highway%7Celement:labels.text.stroke%7Ccolor:0x023e58&style=feature:transit%7Celement:labels.text.fill%7Ccolor:0x98a5be&style=feature:transit%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:transit.line%7Celement:geometry.fill%7Ccolor:0x283d6a&style=feature:transit.station%7Celement:geometry%7Ccolor:0x3a4762&style=feature:water%7Celement:geometry%7Ccolor:0x0e1626&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x4e6d70&size=480x360"
     })
     this.countryFromCountryCode()
   };
@@ -229,6 +236,13 @@ export default class App extends React.Component {
     this.setState({
       fromValue:newValue.toFixed(2),
       toValue: toValue.toFixed(2)
+    })
+  };
+  toMath(x) {
+    let newValue =  this.state.rate * x
+    this.setState({
+      toValue: x,
+      fromValue: newValue.toFixed(2),
     })
   };
   fromMath(x) {
@@ -299,7 +313,6 @@ export default class App extends React.Component {
   
 
   render() {
-
     return (
       <View style={styles.container} >
         <Image
@@ -309,7 +322,7 @@ export default class App extends React.Component {
             flex: 1,
             position: 'absolute',
             width: '100%',
-            height: 400,
+            height: 450,
             justifyContent: 'center',
           }}
           source={{ uri: this.state.map }}
@@ -317,55 +330,80 @@ export default class App extends React.Component {
         />
 
         <LinearGradient 
-          colors = {['rgba(121, 131, 254, .8))', 'rgba(255, 10, 254, 0.2)']}
+          start = {[0.1, 0.1]}
+          colors = {['rgba(121, 131, 254, .5)', '#3713AE']}
           style={styles.sentence}
         >
-          <TextInput
-            ref={(input) => { this.from = input; }} 
-            autofocus='true'
-            keyboardType='number-pad'
-            style={styles.currencyOutput}
-            onChangeText={(fromValue) => this.fromMath(fromValue)}
-            value={this.state.fromValue}
-            backgroundColor= 'none'
-            clearButtonMode = 'always'
-          />
-          <Text style={styles.bold}>
-            <Text>
-             <TouchableOpacity style={styles.buttons} color='rgba(121, 131, 254, 1)' onPress={this._handlePressOpenFrom}>
-              <Text style={styles.subtext}>
-                {this.state.fromSymbol}
-                <Text style={styles.underline}>
-                  {this.state.fromCountryCurrencyName}
+
+          { /* FROM CURRENCY */ }
+          <View style={styles.inputs}>
+            <TextInput
+              ref={(input) => { this.from = input; }} 
+              autofocus='true'
+              keyboardType='number-pad'
+              style={styles.currencyOutput}
+              onChangeText={(fromValue) => this.fromMath(fromValue)}
+              value={this.state.fromValue}
+              backgroundColor= 'none'
+              clearButtonMode = 'always'
+              keyboardAppearance='dark'
+            />
+            <Text style={styles.bold}>
+              <Text>
+              <TouchableOpacity style={styles.buttons} color='rgba(121, 131, 254, 1)' onPress={this._handlePressOpenFrom}>
+              <View style={styles.location}>
+                <Text style={styles.subtext}>
+                  {this.countryEmoji('fromCountryEmoji') + " " + this.state.fromCountryCurrencyName}
                 </Text>
-                {this.countryEmoji('fromCountryEmoji')}
+              </View>
+              </TouchableOpacity>
               </Text>
-             </TouchableOpacity>
             </Text>
-          </Text>
+          </View>  
+          
+        {/*
+          <TouchableOpacity 
+            onPress={this.swapCountry}
+            style={{margin:10}}
+          >
+            <Image
+              style={{height:20,width:30,alignSelf:'center'}}
+              source={swapImg}
+            />
+          </TouchableOpacity>
+        */}
 
-          <Button style={styles.buttons} title='🔄' onPress={this.swapCountry} />
-
-          <Text style={styles.currencyOutput}>{this.state.toValue}</Text>
-          <Text style={styles.bold}>
-            <Text>
-             <TouchableOpacity style={styles.buttons} color='rgba(121, 131, 254, 1)' onPress={this._handlePressOpenTo}>
-              <Text style={styles.subtext}>
-                {this.state.toSymbol}
-                <Text style={styles.underline}>
-                  {this.state.toCountryCurrencyName}
+          { /* TO CURRENCY */ }
+          <View style={styles.inputs}>
+            <TextInput
+              ref={(input) => { this.to = input; }} 
+              autofocus='true'
+              keyboardType='number-pad'
+              style={styles.currencyOutput}
+              onChangeText={(toValue) => this.toMath(toValue)}
+              value={this.state.toValue}
+              backgroundColor= 'none'
+              clearButtonMode = 'always'
+              keyboardAppearance='dark'
+            />
+            <Text style={styles.bold}>
+              <Text>
+              <TouchableOpacity style={styles.buttons} color='rgba(121, 131, 254, 1)' onPress={this._handlePressOpenTo}>
+              <View style={styles.location}>
+                <Text style={styles.subtext}>
+                  {this.countryEmoji('toCountryEmoji') + " " + this.state.toCountryCurrencyName}
                 </Text>
-                {this.countryEmoji('toCountryEmoji')}
+              </View>
+              </TouchableOpacity>
               </Text>
-             </TouchableOpacity>
             </Text>
-          </Text>
+          </View>
+          <View>
+            <Text style={{width:'100%', textAlign:'center', 'color':'#fff8', 'padding':20}}>Last Updated {this.state.backup}</Text>
+          </View>
+        </LinearGradient>
 
-          </LinearGradient>
-        <View style={styles.inputContainer}>
-          <Text style={{width:'100%', textAlign:'center', 'color':'grey', 'padding':20}}>Last Updated {this.state.backup}</Text>
-        </View>
-        {this._maybeRenderModal()}
+      {this._maybeRenderModal()}
       </View>
     );
   }
@@ -426,31 +464,38 @@ export default class App extends React.Component {
   };
 }
 const styles = StyleSheet.create({
-  underline:{
-    textDecorationLine:'underline',
-    padding:10,
+  location: {
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    margin: 10
+  },
+  buttons:{
   },
   subtext:{
-    fontWeight: 'normal', 
-    fontSize: 22, 
-    margin:10,
-    color: 'rgba(255,255,255,0.8)',
+    fontWeight: '600', 
+    fontSize: 16, 
+    margin:6,
+    marginRight:10,
+    color: '#314A9D',
   },
   bold:{
     fontWeight: 'bold',
     fontSize: 60,
-    color: 'white',
+    color: 'black',
     padding:10
   },
   sentence:{
-    height:400,
-    paddingTop:50,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    height:500,
     width:'100%',
-    padding:15,
+    paddingTop:50,
+    padding:10,
   },
   container: {
     height:'100%',
-    backgroundColor: 'white',
+    backgroundColor: '#000',
   },
   pin:{
     position:'absolute',
@@ -462,11 +507,6 @@ const styles = StyleSheet.create({
     color:'white',
     display:'none'
   },
-  inputContainer:{
-    position:'absolute',
-    top:400,
-    width:'100%'
-  },
   countryCurrency:{
     width:'20%',
     textAlign: 'center',
@@ -477,30 +517,24 @@ const styles = StyleSheet.create({
   },
   equals:{
     padding:10,
-    // margin:20,
     fontWeight: 'normal', 
     fontSize: 20, 
-    color: 'rgba(255,255,255,0.4)',
+    color: '#fff8',
   },
   inputs:{
-    padding:10,
-    flex:1,
-    flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'center',
-    width:'100%',
+    marginTop:30,
   },
   currencyOutput: {
-    // flex:1,
-    fontSize:50,
+    fontSize:55,
     fontWeight: 'bold',
     paddingLeft: 10, 
-    // borderColor: 'rgba(121, 131, 254, 1)',
-    // borderColor: 'lightgrey',
-    // borderWidth: 1,
-    // backgroundColor:'white',
-    // borderRadius:5,
     color:'white',
+  },
+  currencyToOutput: {
+    fontSize: 55,
+    fontWeight: 'bold',
+    paddingLeft: 10,
+    color: '#fff',
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
