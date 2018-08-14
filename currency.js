@@ -17,6 +17,7 @@ const currencyPacket = {
     "BAM": 1.681994,
     "BBD": 2,
     "BDT": 83.776578,
+    "BTN": 1000,
     "BGN": 1.67371,
     "BHD": 0.378619,
     "BIF": 1785.5,
