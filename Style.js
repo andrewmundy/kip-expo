@@ -23,14 +23,10 @@ location: {
     padding: 10
   },
   sentence: {
-    // flex: 1,
-    // flexDirection: 'column',
     justifyContent:'space-between',
     height: '100%',
     width: '100%',
     paddingTop: 10,
-    // paddingBottom:20
-    // padding:10,
   },
   container: {
     height: '100%',
@@ -80,12 +76,28 @@ location: {
     backgroundColor: 'rgba(0,0,0,0.65)',
   },
   toolbar: {
-    backgroundColor: '#f3f3f3',
+    backgroundColor: '#C7CCD2',
     paddingVertical: 5,
     paddingHorizontal: 15,
+    justifyContent:'space-between',
+    alignItems:'center',
+    flexDirection:'row'
+  },
+  listText:{
+    fontSize:16,
+    fontWeight:'600',
+    paddingRight:3,
+    paddingLeft:3
+  },
+  list:{
+    padding:5,
+    backgroundColor:'white',
+    // backgroundColor: '#314A9D',
+    borderRadius:50,
+    marginRight:15
   },
   toolbarRight: {
-    alignSelf: 'flex-end',
+    // alignSelf: 'flex-end',
   },
   keypad: {
     padding: 8,
@@ -104,34 +116,36 @@ location: {
   keypadClear: {
     padding: 2,
     borderRadius: 5,
-    // backgroundColor: '#fff1',
     margin: 1,
     width: '13%',
     alignItems: 'center',
     justifyContent: 'center',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    backgroundColor: '#fff5',
+    shadowColor:'#0003',
+    shadowOffset:{ width: 0, height: 1 },
+    shadowOpacity: 1,
+    shadowRadius:0
   },
   keypadFat: {
     padding: 8,
     borderRadius: 5,
-    // backgroundColor: '#fff1',
     margin: 2,
     width: '26%',
     alignItems: 'center',
     justifyContent: 'center',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    backgroundColor: '#fff5',
+    shadowColor:'#0003',
+    shadowOffset:{ width: 0, height: 1 },
+    shadowOpacity: 1,
+    shadowRadius:0
   },
   calculator: {
-    // flex:1,
-    // marginTop: 150,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    // backgroundColor: '#1119',
-    // flexWrap: 'wrap',
-    // paddingBottom: 120,
-    // paddingTop: 25,
     padding: 2,
-    // width:300
+
   },
   num: {
     textAlign:'center',
@@ -146,27 +160,38 @@ location: {
     color: '#555'
   },
   calculatorPanel:{
-    // marginTop:100
-    // bottom:0,
-    // paddingTop:10,
-    // height:'auto',
     padding:5,
-    backgroundColor:'#D2D5DB'
+    backgroundColor:'#C7CCD2'
+    // backgroundColor:'#1119'
   },
   inputButtonHighlighted: {
-    backgroundColor: '#999'
+    backgroundColor: '#4445',
+    shadowColor:'#fff',
+    shadowOffset:{ width: 0, height: 1 },
+    shadowOpacity: 1,
+    shadowRadius:0
   },
   from:{
-    fontSize: 55,
+    fontSize: 48,
     fontWeight: 'bold',
-    paddingLeft: 10,
+    padding: 10,
     color: '#fff',
+    width:'100%',
+    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowOffset: {width: 0, height: 10},
+    textShadowRadius: 20
   },
   to:{
-    fontSize: 55,
+    fontSize: 48,
     fontWeight: 'bold',
-    paddingLeft: 10,
-    color: '#fff8',
+    padding: 10,
+    color: '#fff9',
+    width:'100%',
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: {width: 0, height: 10},
+    textShadowRadius: 20
+  },
+  adjust:{
   }
 });
 

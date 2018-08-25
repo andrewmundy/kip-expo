@@ -1,6 +1,9 @@
 import React from 'react';
 import { 
+  Accelerometer,
+  Modal,
   Vibration,
+  TextInput,
   Animated,
   StyleSheet, 
   Text, 
@@ -43,7 +46,7 @@ export default class App extends React.Component {
       modalAnimatedValue: new Animated.Value(0),
       modalIsVisible: false,
       previousInputValue: 0,
-      selectedSymbol: null,
+      selectedSymbol: " ",
       language:'',
       base:'hello',
       map: 'placeholder',
@@ -51,10 +54,10 @@ export default class App extends React.Component {
       longitude: "0",
       rate: "0",
       initializing: "true",
-      fromCountryCurrencyName:'',
-      fromCountryCurrency: 'USD',
-      fromCountryName: '',
-      fromCountryCode: 'US', 
+      fromCountryCurrencyName:'Thai Baht',
+      fromCountryName: 'Thailand',
+      fromCountryCurrency: 'THB',
+      fromCountryCode: 'TH', 
       fromValue: "",
       fromSymbol: '',
       toCountryCurrencyName: 'United States dollar',
@@ -72,7 +75,9 @@ export default class App extends React.Component {
       currencyPacket:currencyPacket,
       currentLocation:'',
       selected:'from',
-      bitcoin:0
+      bitcoin:0,
+      countryPacket:{},
+      list:'🏡'
     };
   }
 
@@ -95,11 +100,12 @@ export default class App extends React.Component {
        this.createMap()
        this.coordToCountry()
     } catch (error) {
-      console.log(error);
+
     }
   };
 
   componentDidMount(){
+
   };
 
   componentWillMount(){
@@ -120,7 +126,6 @@ export default class App extends React.Component {
     await fetch(url)
     .then((resp) => resp.json())
     .then(function (data) {
-      console.log(data.results[0].address_components[0].short_name)
       that.setState({
         fromCountryName: data.results[0].address_components[0].long_name,
         fromCountryCode: data.results[0].address_components[0].short_name,
@@ -165,7 +170,6 @@ export default class App extends React.Component {
   async countryFromCountryCode(country) {
     let that = this
     let countries = "https://maps.googleapis.com/maps/api/geocode/json?latlng=37.4224764,-122.0842499&result_type=country&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE"
-    console.log(this.state.fromCountryCode + this.state.toCountryCode)
 
     await fetch(countries)
     .then((resp) => resp.json())
@@ -224,7 +228,7 @@ export default class App extends React.Component {
       this.setState({
         [whichMode]:this.state.currentLocation
       })
-    this.countryFromCountryCode(country)
+    this.countryFromCountryCode()
 
     } else if(country === 'BTN'){
       // this.bitCoin()
@@ -273,17 +277,17 @@ export default class App extends React.Component {
   };
   toMath(x) {
     let newValue =  this.state.rate * x
+    let toValue = x.toFixed(2)
     this.setState({
-      toValue: x,
+      toValue:  toValue,
       fromValue: newValue.toFixed(2),
     })
   };
   fromMath(x) {
-    console.log(x)
     let newValue = x / this.state.rate
     this.setState({
       toValue: newValue.toFixed(2),
-      fromValue: x
+      fromValue: x.toFixed(2)
     })
   };
 
@@ -297,7 +301,7 @@ export default class App extends React.Component {
 
   // HANDLEPRESS /\
   ////////////////\
-  _handlePressDone = () => {
+  _handlePressDone = (x) => {
     Animated.timing(this.state.modalAnimatedValue, {
       toValue: 0,
       duration: 150,
@@ -307,7 +311,11 @@ export default class App extends React.Component {
         modalIsVisible: false
       });
     });
-    this.changePosition(this.state[this.state.whichModal])
+    if(x === 'CRL'){
+      this.changePosition('CRL')
+    }else{
+      this.changePosition(this.state[this.state.whichModal])
+    }
     // this.from.focus();
   };
 
@@ -342,6 +350,25 @@ export default class App extends React.Component {
       }).start();
     });
   };
+  expand = () => {
+    if(this.state.list === '🏡'){
+      this.setState({
+        list:'🌍'
+      })
+    }else{
+      this.setState({
+        list:'🏡'
+      })
+    }
+  };
+  list = () => {
+    let whichMode = this.state.whichModal
+    this.setState({
+      [whichMode]:'CRL'
+    })
+    // this.changePosition(this.state[this.state.whichModal])
+    this._handlePressDone('CRL')
+  };
 
   calculator(x){
     let calculation = x
@@ -359,9 +386,9 @@ export default class App extends React.Component {
       selected:'to'
     })
   }
-  
 
   render() {
+
     return (
       <View style={Style.container} >
         <Image
@@ -380,19 +407,25 @@ export default class App extends React.Component {
 
         <LinearGradient 
           start = {[0.1, 0.1]}
-          colors = {['rgba(121, 131, 254, .5)', '#3713AE']}
+          colors = {['rgba(11, 131, 254, .5)', '#3713AE']}
           style={Style.sentence}
         >
 
           { /* FROM CURRENCY */ }
           <View style={Style.inputs}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              style={{justifyContent:'space-around', alignItems:'center',flexDirection:'row', width:'90%'}}
+            >
               <Text
-                style={this.state.selected === 'from'? Style.from : Style.to}
+              adjustsFontSizeToFit={true}
+              numberOfLines={1}
+              minimumFontScale={0.01}
+                style={[this.state.selected === 'from'? Style.from : Style.to, Style.adjust]}
                 onPress={this.touchFrom}
               >
-                {this.state.fromValue}
+              {this.state.fromSymbol ? this.state.fromSymbol:'$'}{" " + this.state.fromValue }
               </Text>
+              <Text style={{fontSize:48,fontWeight:'bold',color:'white'}}>{this.state.selectedSymbol}</Text>
             </TouchableOpacity>
             <Text style={Style.bold}>
               <Text>
@@ -411,10 +444,13 @@ export default class App extends React.Component {
           <View style={Style.inputs}>
           <TouchableOpacity>
           <Text
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}
+            minimumFontScale={0.01}
             style={this.state.selected === 'to'? Style.from : Style.to}
             onPress={this.touchTo}
           >
-            {this.state.toValue}
+            {this.state.toSymbol ? this.state.toSymbol:'$'}{" " + this.state.toValue}
           </Text>
         </TouchableOpacity>
             <Text style={Style.bold}>
@@ -422,34 +458,36 @@ export default class App extends React.Component {
               <TouchableOpacity style={Style.buttons} color='rgba(121, 131, 254, 1)' onPress={this._handlePressOpenTo}>
               <View style={Style.location}>
                 <Text style={Style.subtext}>
-                  {this.countryEmoji('toCountryEmoji') + " " + this.state.toCountryCurrencyName}
+                  {this.countryEmoji('toCountryEmoji')? this.countryEmoji('toCountryEmoji') : null}{" " + this.state.toCountryCurrencyName}
                 </Text>
               </View>
               </TouchableOpacity>
               </Text>
             </Text>
           </View>
-          
           {/* UPDATE */}
           <Text style={{color:'#fff5',textAlign:'center',alignSelf:'center'}}>{this.state.backup}</Text>
-          <View style={Style.calculatorPanel}>
-            <View >
-            {this._renderInputButtons()}
+
+            <View style={Style.calculatorPanel}>
+              <View >
+              {this._renderInputButtons()}
+              </View>
             </View>
-          </View>
+
         </LinearGradient>
 
       {this._maybeRenderModal()}
       </View>
     );
   }
+
   _renderInputButtons() {
     let views = [];
     let inputButtons = [
       [1, 2, 3, '/'],
       [4, 5, 6, '*'],
       [7, 8, 9, '-'],
-      ['=', 0, '←', '+']
+      ['←', 0, '=', '+']
     ]
 
     for (var r = 0; r < inputButtons.length; r++) {
@@ -584,7 +622,7 @@ async _handleStringInput(str) {
           return;
       }
       this.setState({
-          [this.state.selected+"Value"]: eval(previousInputValue + symbol + selectedValue),
+          // [this.state.selected+"Value"]: eval(previousInputValue + symbol + selectedValue),
           previousInputValue: 0,
           selectedSymbol: null
       });
@@ -618,7 +656,6 @@ async _handleStringInput(str) {
 _handleNumberInput(num) {
     let selected = this.state.selected+"Value"
     let inputValue = (this.state[selected] * 10) + num;
-    Vibration.vibrate(1000)
     
     if(selected === 'toValue'){
       this.toMath(inputValue)
@@ -630,7 +667,7 @@ _handleNumberInput(num) {
     if (!this.state.modalIsVisible) {
       return null;
     }
-
+    let options = ratesPacket
     let whichMode = this.state.whichModal
     const { modalAnimatedValue } = this.state;
     const opacity = modalAnimatedValue;
@@ -638,7 +675,7 @@ _handleNumberInput(num) {
       inputRange: [0, 1],
       outputRange: [300, 0],
     });
-
+    
     return (
       <View
         style={StyleSheet.absoluteFill}
@@ -654,17 +691,24 @@ _handleNumberInput(num) {
             transform: [{ translateY }],
           }}>
           <View style={Style.toolbar}>
-            <View style={Style.toolbarRight}>
-              <Button color="#3713AE" title="Done" onPress={this._handlePressDone} />
-            </View>
+              <View style={{flexDirection:'row'}}>
+                <TouchableOpacity style={Style.list} onPress={this.list}> <Text style={Style.listText}>📍</Text></TouchableOpacity>
+                <TouchableOpacity style={Style.list} onPress={this.expand}> <Text style={Style.listText}>{this.state.list}</Text></TouchableOpacity>
+              </View>
+            <Button style={{alignSelf:'flex-end'}}  title="Done" onPress={this._handlePressDone} />
           </View>
           <Picker
             style={{ width: WindowWidth, backgroundColor: '#fff' }}
             selectedValue={this.state[whichMode]}
             onValueChange={itemValue => this.setState({ [whichMode]: itemValue })}>
-            <Picker.Item style={{ color:'#3713AE'}} label="Current Location 📍" value="CRL"/>
-            <Picker.Item label="United States 🇺🇸" value="US"/>
-            {/*<Picker.Item label="Bitcoin ₿" value="BTN"/>*/}
+            {Object.keys(ratesPacket.results).sort().map((key) => {
+              let packet = ratesPacket.results[key]
+              let name = packet.emoji ? packet.name + " " + packet.emoji : packet.name
+              if(this.state.list === '🏡'){
+                return (<Picker.Item label={name} value={key} key={key}/>)
+              }
+              
+            })}
             <Picker.Item label="Mexico 🇲🇽" value="MX" />
             <Picker.Item label="Sweden 🇸🇪" value="SE" />
             <Picker.Item label="France 🇫🇷" value="FR" />

@@ -13,7 +13,7 @@ export default class InputButtonFat extends Component {
         return (
             <TouchableHighlight 
                 style={[Style.keypadFat, this.props.highlight ? Style.inputButtonHighlighted : null]}
-                underlayColor="#193441"
+                underlayColor="#9995"
                 onPress={this.props.onPress}>                
                 <Text style={Style.numOp}>{this.props.value}</Text>
             </TouchableHighlight>

@@ -6,6 +6,7 @@ const ratesPacket = {
       "currencyName": "Afghan afghani",
       "currencySymbol": "؋",
       "id": "AF",
+      "emoji": "🇦🇫",
       "name": "Afghanistan"
     },
     "AI": {
@@ -14,6 +15,7 @@ const ratesPacket = {
       "currencyName": "East Caribbean dollar",
       "currencySymbol": "$",
       "id": "AI",
+      "emoji": "🇦🇮",
       "name": "Anguilla"
     },
     "AU": {
@@ -22,6 +24,7 @@ const ratesPacket = {
       "currencyName": "Australian dollar",
       "currencySymbol": "$",
       "id": "AU",
+      "emoji": "🇦🇺",
       "name": "Australia"
     },
     "BD": {
@@ -29,6 +32,7 @@ const ratesPacket = {
       "currencyName": "Bangladeshi taka",
       "name": "Bangladesh",
       "alpha3": "BGD",
+      "emoji": "🇧🇩",
       "id": "BD"
     },
     "BJ": {
@@ -36,6 +40,7 @@ const ratesPacket = {
       "currencyName": "West African CFA franc",
       "name": "Benin",
       "alpha3": "BEN",
+      "emoji": "🇧🇯",
       "id": "BJ"
     },
     "BR": {
@@ -44,6 +49,7 @@ const ratesPacket = {
       "currencyName": "Brazilian real",
       "currencySymbol": "R$",
       "id": "BR",
+      "emoji": "🇧🇷",
       "name": "Brazil"
     },
     "KH": {
@@ -52,6 +58,7 @@ const ratesPacket = {
       "currencyName": "Cambodian riel",
       "currencySymbol": "៛",
       "id": "KH",
+      "emoji": "🇰🇭",
       "name": "Cambodia"
     },
     "TD": {
@@ -59,6 +66,7 @@ const ratesPacket = {
       "currencyName": "Central African CFA franc",
       "name": "Chad",
       "alpha3": "TCD",
+      "emoji": "🇹🇩",
       "id": "TD"
     },
     "CG": {
@@ -66,6 +74,7 @@ const ratesPacket = {
       "currencyName": "Central African CFA franc",
       "name": "Congo",
       "alpha3": "COG",
+      "emoji": "🇨🇬",
       "id": "CG"
     },
     "CU": {
@@ -73,6 +82,7 @@ const ratesPacket = {
       "currencyName": "Cuban peso",
       "currencySymbol": "$",
       "name": "Cuba",
+      "emoji": "🇨🇺",
       "alpha3": "CUB",
       "id": "CU"
     },
@@ -82,6 +92,7 @@ const ratesPacket = {
       "currencyName": "East Caribbean dollar",
       "currencySymbol": "$",
       "id": "DM",
+      "emoji": "🇩🇲",
       "name": "Dominica"
     },
     "FI": {
@@ -90,12 +101,14 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "FI",
+      "emoji": "🇫🇮",
       "name": "Finland"
     },
     "GE": {
       "currencyId": "GEL",
       "currencyName": "Georgian lari",
       "name": "Georgia",
+      "emoji": "🇬🇪",
       "alpha3": "GEO",
       "id": "GE"
     },
@@ -105,6 +118,7 @@ const ratesPacket = {
       "currencyName": "East Caribbean dollar",
       "currencySymbol": "$",
       "id": "GD",
+      "emoji": "🇬🇩",
       "name": "Grenada"
     },
     "HT": {
@@ -112,6 +126,7 @@ const ratesPacket = {
       "currencyName": "Haitian gourde",
       "name": "Haiti",
       "alpha3": "HTI",
+      "emoji": "🇭🇹",
       "id": "HT"
     },
     "IN": {
@@ -120,6 +135,7 @@ const ratesPacket = {
       "currencyName": "Indian rupee",
       "currencySymbol": "₹",
       "id": "IN",
+      "emoji": "🇮🇳",
       "name": "India"
     },
     "IL": {
@@ -128,6 +144,7 @@ const ratesPacket = {
       "currencyName": "Israeli new sheqel",
       "currencySymbol": "₪",
       "id": "IL",
+      "emoji": "🇮🇱",
       "name": "Israel"
     },
     "KZ": {
@@ -136,6 +153,7 @@ const ratesPacket = {
       "currencyName": "Kazakhstani tenge",
       "currencySymbol": "лв",
       "id": "KZ",
+      "emoji": "🇰🇿",
       "name": "Kazakhstan"
     },
     "KW": {
@@ -143,6 +161,7 @@ const ratesPacket = {
       "currencyName": "Kuwaiti dinar",
       "name": "Kuwait",
       "alpha3": "KWT",
+      "emoji": "🇰🇼",
       "id": "KW"
     },
     "LS": {
@@ -150,6 +169,7 @@ const ratesPacket = {
       "currencyName": "Lesotho loti",
       "name": "Lesotho",
       "alpha3": "LSO",
+      "emoji": "🇱🇸",
       "id": "LS"
     },
     "LU": {
@@ -158,6 +178,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "LU",
+      "emoji": "🇱🇺",
       "name": "Luxembourg"
     },
     "MY": {
@@ -166,6 +187,7 @@ const ratesPacket = {
       "currencyName": "Malaysian ringgit",
       "currencySymbol": "RM",
       "id": "MY",
+      "emoji": "🇲🇾",
       "name": "Malaysia"
     },
     "MU": {
@@ -174,6 +196,7 @@ const ratesPacket = {
       "currencyName": "Mauritian rupee",
       "currencySymbol": "₨",
       "id": "MU",
+      "emoji": "🇲🇺",
       "name": "Mauritius"
     },
     "MN": {
@@ -182,6 +205,7 @@ const ratesPacket = {
       "currencyName": "Mongolian tugrik",
       "currencySymbol": "₮",
       "id": "MN",
+      "emoji": "🇲🇳",
       "name": "Mongolia"
     },
     "MM": {
@@ -189,6 +213,7 @@ const ratesPacket = {
       "currencyName": "Myanma kyat",
       "name": "Myanmar",
       "alpha3": "MMR",
+      "emoji": "🇲🇲",
       "id": "MM"
     },
     "NC": {
@@ -196,6 +221,7 @@ const ratesPacket = {
       "currencyName": "CFP franc",
       "name": "New Caledonia",
       "alpha3": "NCL",
+      "emoji": "🇳🇨",
       "id": "NC"
     },
     "NO": {
@@ -204,6 +230,7 @@ const ratesPacket = {
       "currencyName": "Norwegian krone",
       "currencySymbol": "kr",
       "id": "NO",
+      "emoji": "🇳🇴",
       "name": "Norway"
     },
     "PG": {
@@ -211,6 +238,7 @@ const ratesPacket = {
       "currencyName": "Papua New Guinean kina",
       "name": "Papua New Guinea",
       "alpha3": "PNG",
+      "emoji": "🇵🇬",
       "id": "PG"
     },
     "PT": {
@@ -219,6 +247,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "PT",
+      "emoji": "🇵🇹",
       "name": "Portugal"
     },
     "RW": {
@@ -226,6 +255,7 @@ const ratesPacket = {
       "currencyName": "Rwandan franc",
       "name": "Rwanda",
       "alpha3": "RWA",
+      "emoji": "🇷🇼",
       "id": "RW"
     },
     "WS": {
@@ -233,6 +263,7 @@ const ratesPacket = {
       "currencyName": "Samoan tala",
       "name": "Samoa (Western)",
       "alpha3": "WSM",
+      "emoji": "🇼🇸",
       "id": "WS"
     },
     "RS": {
@@ -241,6 +272,7 @@ const ratesPacket = {
       "currencyName": "Serbian dinar",
       "currencySymbol": "Дин.",
       "id": "RS",
+      "emoji": "🇷🇸",
       "name": "Serbia"
     },
     "SI": {
@@ -249,6 +281,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "SI",
+      "emoji": "🇸🇮",
       "name": "Slovenia"
     },
     "ES": {
@@ -257,6 +290,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "ES",
+      "emoji": "🇪🇸",
       "name": "Spain"
     },
     "SE": {
@@ -274,6 +308,7 @@ const ratesPacket = {
       "currencyName": "Tanzanian shilling",
       "currencySymbol": "TSh",
       "id": "TZ",
+      "emoji": "🇹🇿",
       "name": "Tanzania"
     },
     "TN": {
@@ -281,6 +316,7 @@ const ratesPacket = {
       "currencyName": "Tunisian dinar",
       "name": "Tunisia",
       "alpha3": "TUN",
+      "emoji": "🇹🇳",
       "id": "TN"
     },
     "UA": {
@@ -289,6 +325,7 @@ const ratesPacket = {
       "currencyName": "Ukrainian hryvnia",
       "currencySymbol": "₴",
       "id": "UA",
+      "emoji": "🇺🇦",
       "name": "Ukraine"
     },
     "UZ": {
@@ -297,6 +334,7 @@ const ratesPacket = {
       "currencyName": "Uzbekistani som",
       "currencySymbol": "лв",
       "id": "UZ",
+      "emoji": "🇺🇿",
       "name": "Uzbekistan"
     },
     "YE": {
@@ -305,6 +343,7 @@ const ratesPacket = {
       "currencyName": "Yemeni rial",
       "currencySymbol": "﷼",
       "id": "YE",
+      "emoji": "🇾🇪",
       "name": "Yemen"
     },
     "DZ": {
@@ -312,6 +351,7 @@ const ratesPacket = {
       "currencyName": "Algerian dinar",
       "name": "Algeria",
       "alpha3": "DZA",
+      "emoji": "🇩🇿",
       "id": "DZ"
     },
     "AR": {
@@ -320,6 +360,7 @@ const ratesPacket = {
       "currencyName": "Argentine peso",
       "currencySymbol": "$",
       "id": "AR",
+      "emoji": "🇦🇷",
       "name": "Argentina"
     },
     "AZ": {
@@ -328,6 +369,7 @@ const ratesPacket = {
       "currencyName": "Azerbaijani manat",
       "currencySymbol": "ман",
       "id": "AZ",
+      "emoji": "🇦🇿",
       "name": "Azerbaijan"
     },
     "BY": {
@@ -336,6 +378,7 @@ const ratesPacket = {
       "currencyName": "New Belarusian ruble",
       "currencySymbol": "p.",
       "id": "BY",
+      "emoji": "🇧🇾",
       "name": "Belarus"
     },
     "BO": {
@@ -344,6 +387,7 @@ const ratesPacket = {
       "currencyName": "Bolivian boliviano",
       "currencySymbol": "$b",
       "id": "BO",
+      "emoji": "🇧🇴",
       "name": "Bolivia"
     },
     "BG": {
@@ -352,6 +396,7 @@ const ratesPacket = {
       "currencyName": "Bulgarian lev",
       "currencySymbol": "лв",
       "id": "BG",
+      "emoji": "🇧🇬",
       "name": "Bulgaria"
     },
     "CA": {
@@ -360,6 +405,7 @@ const ratesPacket = {
       "currencyName": "Canadian dollar",
       "currencySymbol": "$",
       "id": "CA",
+      "emoji": "🇨🇦",
       "name": "Canada"
     },
     "CN": {
@@ -368,6 +414,7 @@ const ratesPacket = {
       "currencyName": "Chinese renminbi",
       "currencySymbol": "¥",
       "id": "CN",
+      "emoji": "🇨🇳",
       "name": "China"
     },
     "CR": {
@@ -376,6 +423,7 @@ const ratesPacket = {
       "currencyName": "Costa Rican colon",
       "currencySymbol": "₡",
       "id": "CR",
+      "emoji": "🇨🇷",
       "name": "Costa Rica"
     },
     "CZ": {
@@ -384,6 +432,7 @@ const ratesPacket = {
       "currencyName": "Czech koruna",
       "currencySymbol": "Kč",
       "id": "CZ",
+      "emoji": "🇨🇿",
       "name": "Czech Republic"
     },
     "EC": {
@@ -392,6 +441,7 @@ const ratesPacket = {
       "currencyName": "U.S. Dollar",
       "currencySymbol": "$",
       "id": "EC",
+      "emoji": "🇪🇨",
       "name": "Ecuador"
     },
     "EE": {
@@ -400,6 +450,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "EE",
+      "emoji": "🇪🇪",
       "name": "Estonia"
     },
     "PF": {
@@ -407,6 +458,7 @@ const ratesPacket = {
       "currencyName": "CFP franc",
       "name": "French Polynesia",
       "alpha3": "PYF",
+      "emoji": "🇵🇫",
       "id": "PF"
     },
     "GH": {
@@ -414,6 +466,7 @@ const ratesPacket = {
       "currencyName": "Ghanaian cedi",
       "name": "Ghana",
       "alpha3": "GHA",
+      "emoji": "🇬🇭",
       "id": "GH"
     },
     "GN": {
@@ -421,6 +474,7 @@ const ratesPacket = {
       "currencyName": "Guinean franc",
       "name": "Guinea",
       "alpha3": "GIN",
+      "emoji": "🇬🇳",
       "id": "GN"
     },
     "HK": {
@@ -428,6 +482,7 @@ const ratesPacket = {
       "currencyId": "HKD",
       "currencyName": "Hong Kong dollar",
       "currencySymbol": "$",
+      "emoji": "🇭🇰",
       "id": "HK",
       "name": "Hong Kong"
     },
@@ -437,6 +492,7 @@ const ratesPacket = {
       "currencyName": "Iranian rial",
       "currencySymbol": "﷼",
       "id": "IR",
+      "emoji": "🇮🇷",
       "name": "Iran, Islamic Republic of"
     },
     "JM": {
@@ -445,6 +501,7 @@ const ratesPacket = {
       "currencyName": "Jamaican dollar",
       "currencySymbol": "J$",
       "id": "JM",
+      "emoji": "🇯🇲",
       "name": "Jamaica"
     },
     "KI": {
@@ -453,6 +510,7 @@ const ratesPacket = {
       "currencyName": "Australian dollar",
       "currencySymbol": "$",
       "id": "KI",
+      "emoji": "🇰🇮",
       "name": "Kiribati"
     },
     "LA": {
@@ -469,6 +527,7 @@ const ratesPacket = {
       "currencyName": "Libyan dinar",
       "name": "Libya",
       "alpha3": "LBY",
+      "emoji": "🇱🇾",
       "id": "LY"
     },
     "MK": {
@@ -477,6 +536,7 @@ const ratesPacket = {
       "currencyName": "Macedonian denar",
       "currencySymbol": "ден",
       "id": "MK",
+      "emoji": "🇲🇰",
       "name": "Macedonia (Former Yug. Rep.)"
     },
     "ML": {
@@ -484,6 +544,7 @@ const ratesPacket = {
       "currencyName": "West African CFA franc",
       "name": "Mali",
       "alpha3": "MLI",
+      "emoji": "🇲🇱",
       "id": "ML"
     },
     "FM": {
@@ -492,6 +553,7 @@ const ratesPacket = {
       "currencyName": "U.S. Dollar",
       "currencySymbol": "$",
       "id": "FM",
+      "emoji": "🇫🇲",
       "name": "Micronesia"
     },
     "MS": {
@@ -500,6 +562,7 @@ const ratesPacket = {
       "currencyName": "East Caribbean dollar",
       "currencySymbol": "$",
       "id": "MS",
+      "emoji": "🇲🇸",
       "name": "Montserrat"
     },
     "NR": {
@@ -508,6 +571,7 @@ const ratesPacket = {
       "currencyName": "Australian dollar",
       "currencySymbol": "$",
       "id": "NR",
+      "emoji": "🇳🇷",
       "name": "Nauru"
     },
     "NI": {
@@ -516,6 +580,7 @@ const ratesPacket = {
       "currencyName": "Nicaraguan cordoba",
       "currencySymbol": "C$",
       "id": "NI",
+      "emoji": "🇳🇮",
       "name": "Nicaragua"
     },
     "PK": {
@@ -524,6 +589,7 @@ const ratesPacket = {
       "currencyName": "Pakistani rupee",
       "currencySymbol": "₨",
       "id": "PK",
+      "emoji": "🇵🇰",
       "name": "Pakistan"
     },
     "PE": {
@@ -532,6 +598,7 @@ const ratesPacket = {
       "currencyName": "Peruvian nuevo sol",
       "currencySymbol": "S/.",
       "id": "PE",
+      "emoji": "🇵🇪",
       "name": "Peru"
     },
     "QA": {
@@ -540,6 +607,7 @@ const ratesPacket = {
       "currencyName": "Qatari riyal",
       "currencySymbol": "﷼",
       "id": "QA",
+      "emoji": "🇶🇦",
       "name": "Qatar"
     },
     "KN": {
@@ -547,6 +615,7 @@ const ratesPacket = {
       "currencyId": "XCD",
       "currencyName": "East Caribbean dollar",
       "currencySymbol": "$",
+      "emoji": "🇧🇰🇳",
       "id": "KN",
       "name": "Saint Kitts and Nevis"
     },
@@ -555,6 +624,7 @@ const ratesPacket = {
       "currencyName": "Sao Tome and Principe dobra",
       "name": "Sao Tome and Principe",
       "alpha3": "STP",
+      "emoji": "🇸🇹",
       "id": "ST"
     },
     "SL": {
@@ -562,6 +632,7 @@ const ratesPacket = {
       "currencyName": "Sierra Leonean leone",
       "name": "Sierra Leone",
       "alpha3": "SLE",
+      "emoji": "🇸🇱",
       "id": "SL"
     },
     "SO": {
@@ -570,6 +641,7 @@ const ratesPacket = {
       "currencyName": "Somali shilling",
       "currencySymbol": "S",
       "id": "SO",
+      "emoji": "🇸🇴",
       "name": "Somalia"
     },
     "SD": {
@@ -577,6 +649,7 @@ const ratesPacket = {
       "currencyName": "Sudanese pound",
       "name": "Sudan",
       "alpha3": "SDN",
+      "emoji": "🇸🇩",
       "id": "SD"
     },
     "SY": {
@@ -585,6 +658,7 @@ const ratesPacket = {
       "currencyName": "Syrian pound",
       "currencySymbol": "£",
       "id": "SY",
+      "emoji": "🇸🇾",
       "name": "Syria"
     },
     "TG": {
@@ -592,6 +666,7 @@ const ratesPacket = {
       "currencyName": "West African CFA franc",
       "name": "Togo",
       "alpha3": "TGO",
+      "emoji": "🇹🇬",
       "id": "TG"
     },
     "TM": {
@@ -599,6 +674,7 @@ const ratesPacket = {
       "currencyName": "Turkmenistan manat",
       "name": "Turkmenistan",
       "alpha3": "TKM",
+      "emoji": "🇹🇲",
       "id": "TM"
     },
     "GB": {
@@ -607,6 +683,7 @@ const ratesPacket = {
       "currencyName": "British pound",
       "currencySymbol": "£",
       "id": "GB",
+      "emoji": "🇬🇧",
       "name": "United Kingdom"
     },
     "VE": {
@@ -614,6 +691,7 @@ const ratesPacket = {
       "currencyName": "Venezuelan bolivar",
       "name": "Venezuela",
       "alpha3": "VEN",
+      "emoji": "🇻🇪",
       "id": "VE"
     },
     "AD": {
@@ -622,6 +700,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "AD",
+      "emoji": "🇦🇩",
       "name": "Andorra"
     },
     "AM": {
@@ -629,6 +708,7 @@ const ratesPacket = {
       "currencyName": "Armenian dram",
       "name": "Armenia",
       "alpha3": "ARM",
+      "emoji": "🇦🇲",
       "id": "AM"
     },
     "BS": {
@@ -637,6 +717,7 @@ const ratesPacket = {
       "currencyName": "Bahamian dollar",
       "currencySymbol": "$",
       "id": "BS",
+      "emoji": "🇧🇸",
       "name": "Bahamas"
     },
     "BE": {
@@ -645,6 +726,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "BE",
+      "emoji": "🇧🇪",
       "name": "Belgium"
     },
     "BA": {
@@ -653,6 +735,7 @@ const ratesPacket = {
       "currencyName": "Bosnia and Herzegovina konvertibilna marka",
       "currencySymbol": "KM",
       "id": "BA",
+      "emoji": "🇧🇦",
       "name": "Bosnia-Herzegovina"
     },
     "BF": {
@@ -660,6 +743,7 @@ const ratesPacket = {
       "currencyName": "West African CFA franc",
       "name": "Burkina Faso",
       "alpha3": "BFA",
+      "emoji": "🇧🇫",
       "id": "BF"
     },
     "KY": {
@@ -668,6 +752,7 @@ const ratesPacket = {
       "currencyName": "Cayman Islands dollar",
       "currencySymbol": "$",
       "id": "KY",
+      "emoji": "🇰🇾",
       "name": "Cayman Islands"
     },
     "CO": {
@@ -676,6 +761,7 @@ const ratesPacket = {
       "currencyName": "Colombian peso",
       "currencySymbol": "$",
       "id": "CO",
+      "emoji": "🇨🇴",
       "name": "Colombia"
     },
     "CI": {
@@ -683,6 +769,7 @@ const ratesPacket = {
       "currencyName": "West African CFA franc",
       "name": "Côte d'Ivoire",
       "alpha3": "CIV",
+      "emoji": "🚩",
       "id": "CI"
     },
     "DK": {
@@ -690,6 +777,7 @@ const ratesPacket = {
       "currencyId": "DKK",
       "currencyName": "Danish krone",
       "currencySymbol": "kr",
+      "emoji": "🇩🇰",
       "id": "DK",
       "name": "Denmark"
     },
@@ -698,6 +786,7 @@ const ratesPacket = {
       "currencyId": "EGP",
       "currencyName": "Egyptian pound",
       "currencySymbol": "£",
+      "emoji": "🇪🇬",
       "id": "EG",
       "name": "Egypt"
     },
@@ -706,6 +795,7 @@ const ratesPacket = {
       "currencyName": "Ethiopian birr",
       "name": "Ethiopia",
       "alpha3": "ETH",
+      "emoji": "🇪🇹",
       "id": "ET"
     },
     "GA": {
@@ -713,6 +803,7 @@ const ratesPacket = {
       "currencyName": "Central African CFA franc",
       "name": "Gabon",
       "alpha3": "GAB",
+      "emoji": "🇬🇦",
       "id": "GA"
     },
     "GI": {
@@ -721,6 +812,7 @@ const ratesPacket = {
       "currencyName": "Gibraltar pound",
       "currencySymbol": "£",
       "id": "GI",
+      "emoji": "🇬🇮",
       "name": "Gibraltar"
     },
     "GW": {
@@ -728,6 +820,7 @@ const ratesPacket = {
       "currencyName": "West African CFA franc",
       "name": "Guinea-Bissau",
       "alpha3": "GNB",
+      "emoji": "🇬🇼",
       "id": "GW"
     },
     "HU": {
@@ -736,6 +829,7 @@ const ratesPacket = {
       "currencyName": "Hungarian forint",
       "currencySymbol": "Ft",
       "id": "HU",
+      "emoji": "🇭🇺",
       "name": "Hungary"
     },
     "IQ": {
@@ -743,6 +837,7 @@ const ratesPacket = {
       "currencyName": "Iraqi dinar",
       "name": "Iraq",
       "alpha3": "IRQ",
+      "emoji": "🇮🇶",
       "id": "IQ"
     },
     "JP": {
@@ -760,6 +855,7 @@ const ratesPacket = {
       "currencyName": "North Korean won",
       "currencySymbol": "₩",
       "id": "KP",
+      "emoji": "🇰🇵",
       "name": "Korea North"
     },
     "LV": {
@@ -768,6 +864,7 @@ const ratesPacket = {
       "currencyName": "Latvian lats",
       "currencySymbol": "Ls",
       "id": "LV",
+      "emoji": "🇱🇻",
       "name": "Latvia"
     },
     "LI": {
@@ -776,6 +873,7 @@ const ratesPacket = {
       "currencyName": "Swiss Franc",
       "currencySymbol": "Fr.",
       "id": "LI",
+      "emoji": "🇱🇮",
       "name": "Liechtenstein"
     },
     "MG": {
@@ -783,6 +881,7 @@ const ratesPacket = {
       "currencyName": "Malagasy ariary",
       "name": "Madagascar",
       "alpha3": "MDG",
+      "emoji": "🇲🇬",
       "id": "MG"
     },
     "MT": {
@@ -791,6 +890,7 @@ const ratesPacket = {
       "currencyName": "European Euro",
       "currencySymbol": "€",
       "id": "MT",
+      "emoji": "🇲🇹",
       "name": "Malta"
     },
     "MD": {
@@ -798,6 +898,7 @@ const ratesPacket = {
       "currencyName": "Moldovan leu",
       "name": "Moldova",
       "alpha3": "MDA",
+      "emoji": "🇲🇩",
       "id": "MD"
     },
     "MA": {
@@ -805,6 +906,7 @@ const ratesPacket = {
       "currencyName": "Moroccan dirham",
       "name": "Morocco",
       "alpha3": "MAR",
+      "emoji": "🇲🇦",
       "id": "MA"
     },
     "NP": {
@@ -812,6 +914,7 @@ const ratesPacket = {
       "currencyId": "NPR",
       "currencyName": "Nepalese rupee",
       "currencySymbol": "₨",
+      "emoji": "🇳🇵",
       "id": "NP",
       "name": "Nepal"
     },
@@ -820,6 +923,7 @@ const ratesPacket = {
       "currencyName": "West African CFA franc",
       "name": "Niger",
       "alpha3": "NER",
+      "emoji": "🇳🇪",
       "id": "NE"
     },
     "PW": {
@@ -828,6 +932,7 @@ const ratesPacket = {
       "currencyName": "U.S. Dollar",
       "currencySymbol": "$",
       "id": "PW",
+      "emoji": "🇵🇼",
       "name": "Palau"
     },
     "PH": {
@@ -836,6 +941,7 @@ const ratesPacket = {
       "currencyName": "Philippine peso",
       "currencySymbol": "₱",
       "id": "PH",
+      "emoji": "🇵🇭",
       "name": "Philippines"
     },
     "RO": {
@@ -844,6 +950,7 @@ const ratesPacket = {
       "currencyName": "Romanian leu",
       "currencySymbol": "lei",
       "id": "RO",
+      "emoji": "🇷🇴",
       "name": "Romania"
     },
     "LC": {
@@ -851,6 +958,7 @@ const ratesPacket = {
       "currencyId": "XCD",
       "currencyName": "East Caribbean dollar",
       "currencySymbol": "$",
+      "emoji": "🇱🇨",
       "id": "LC",
       "name": "Saint Lucia"
     },
@@ -860,6 +968,7 @@ const ratesPacket = {
       "currencyName": "Saudi riyal",
       "currencySymbol": "﷼",
       "id": "SA",
+      "emoji": "🇸🇦",
       "name": "Saudi Arabia"
     },
     "SG": {
@@ -868,6 +977,7 @@ const ratesPacket = {
       "currencyName": "Singapore dollar",
       "currencySymbol": "$",
       "id": "SG",
+      "emoji": "🇸🇬",
       "name": "Singapore"
     },
     "ZA": {
@@ -876,6 +986,7 @@ const ratesPacket = {
       "currencyName": "South African rand",
       "currencySymbol": "R",
       "id": "ZA",
+      "emoji": "🇿🇦",
       "name": "South Africa"
     },
     "SR": {
@@ -884,6 +995,7 @@ const ratesPacket = {
       "currencyName": "Surinamese dollar",
       "currencySymbol": "$",
       "id": "SR",
+      "emoji": "🇸🇷",
       "name": "Suriname"
     },
     "TW": {
@@ -892,6 +1004,7 @@ const ratesPacket = {
       "currencyName": "New Taiwan dollar",
       "currencySymbol": "NT$",
       "id": "TW",
+      "emoji": "🇹🇼",
       "name": "Taiwan"
     },
     "TO": {
@@ -899,6 +1012,7 @@ const ratesPacket = {
       "currencyName": "Paanga",
       "name": "Tonga",
       "alpha3": "TON",
+      "emoji": "🇹🇴",
       "id": "TO"
     },
     "TV": {
@@ -907,6 +1021,7 @@ const ratesPacket = {
       "currencyName": "Australian dollar",
       "currencySymbol": "$",
       "id": "TV",
+      "emoji": "🇹🇻",
       "name": "Tuvalu"
     },
     "US": {
@@ -933,6 +1048,7 @@ const ratesPacket = {
       "currencyName": "Albanian lek",
       "currencySymbol": "Lek",
       "id": "AL",
+      "emoji": "🇦🇱",
       "name": "Albania"
     },
     "AG": {
@@ -941,6 +1057,7 @@ const ratesPacket = {
       "currencyName": "East Caribbean dollar",
       "currencySymbol": "$",
       "id": "AG",
+      "emoji": "🇦🇬",
       "name": "Antigua and Barbuda"
     },
     "AT": {
@@ -949,6 +1066,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "AT",
+      "emoji": "🇦🇺",
       "name": "Austria"
     },
     "BB": {
@@ -957,6 +1075,7 @@ const ratesPacket = {
       "currencyName": "Barbadian dollar",
       "currencySymbol": "$",
       "id": "BB",
+      "emoji": "🇧🇧",
       "name": "Barbados"
     },
     "BT": {
@@ -964,6 +1083,7 @@ const ratesPacket = {
       "currencyName": "Bhutanese ngultrum",
       "name": "Bhutan",
       "alpha3": "BTN",
+      "emoji": "🇧🇹",
       "id": "BT"
     },
     "BN": {
@@ -972,6 +1092,7 @@ const ratesPacket = {
       "currencyName": "Brunei dollar",
       "currencySymbol": "$",
       "id": "BN",
+      "emoji": "🇧🇳",
       "name": "Brunei"
     },
     "CM": {
@@ -979,6 +1100,7 @@ const ratesPacket = {
       "currencyName": "Central African CFA franc",
       "name": "Cameroon",
       "alpha3": "CMR",
+      "emoji": "🇨🇲",
       "id": "CM"
     },
     "CL": {
@@ -987,6 +1109,7 @@ const ratesPacket = {
       "currencyName": "Chilean peso",
       "currencySymbol": "$",
       "id": "CL",
+      "emoji": "🇨🇱",
       "name": "Chile"
     },
     "CD": {
@@ -994,6 +1117,7 @@ const ratesPacket = {
       "currencyName": "Congolese franc",
       "name": "Congo, Democratic Republic",
       "alpha3": "COD",
+      "emoji": "🇨🇬",
       "id": "CD"
     },
     "CY": {
@@ -1002,6 +1126,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "CY",
+      "emoji": "🇨🇾",
       "name": "Cyprus"
     },
     "DO": {
@@ -1010,6 +1135,7 @@ const ratesPacket = {
       "currencyName": "Dominican peso",
       "currencySymbol": "RD$",
       "id": "DO",
+      "emoji": "🇩🇴",
       "name": "Dominican Republic"
     },
     "ER": {
@@ -1017,6 +1143,7 @@ const ratesPacket = {
       "currencyName": "Eritrean nakfa",
       "name": "Eritrea",
       "alpha3": "ERI",
+      "emoji": "🇪🇷",
       "id": "ER"
     },
     "FR": {
@@ -1043,6 +1170,7 @@ const ratesPacket = {
       "currencyName": "Guatemalan quetzal",
       "currencySymbol": "Q",
       "id": "GT",
+      "emoji": "🇬🇹",
       "name": "Guatemala"
     },
     "HN": {
@@ -1051,6 +1179,7 @@ const ratesPacket = {
       "currencyName": "Honduran lempira",
       "currencySymbol": "L",
       "id": "HN",
+      "emoji": "🇭🇳",
       "name": "Honduras"
     },
     "ID": {
@@ -1068,6 +1197,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "IT",
+      "emoji": "🇮🇹",
       "name": "Italy"
     },
     "KE": {
@@ -1076,6 +1206,7 @@ const ratesPacket = {
       "currencyName": "Kenyan shilling",
       "currencySymbol": "KSh",
       "id": "KE",
+      "emoji": "🇰🇪",
       "name": "Kenya"
     },
     "KG": {
@@ -1084,6 +1215,7 @@ const ratesPacket = {
       "currencyName": "Kyrgyzstani som",
       "currencySymbol": "лв",
       "id": "KG",
+      "emoji": "🇰🇬",
       "name": "Kyrgyzstan"
     },
     "LR": {
@@ -1092,6 +1224,7 @@ const ratesPacket = {
       "currencyName": "Liberian dollar",
       "currencySymbol": "$",
       "id": "LR",
+      "emoji": "🇱🇷",
       "name": "Liberia"
     },
     "MO": {
@@ -1099,6 +1232,7 @@ const ratesPacket = {
       "currencyName": "Macanese pataca",
       "name": "Macau",
       "alpha3": "MAC",
+      "emoji": "🇲🇴",
       "id": "MO"
     },
     "MV": {
@@ -1106,6 +1240,7 @@ const ratesPacket = {
       "currencyName": "Maldivian rufiyaa",
       "name": "Maldives",
       "alpha3": "MDV",
+      "emoji": "🇲🇻",
       "id": "MV"
     },
     "MX": {
@@ -1123,6 +1258,7 @@ const ratesPacket = {
       "currencyName": "European Euro",
       "currencySymbol": "€",
       "id": "ME",
+      "emoji": "🇲🇪",
       "name": "Montenegro"
     },
     "NA": {
@@ -1131,6 +1267,7 @@ const ratesPacket = {
       "currencyName": "Namibian dollar",
       "currencySymbol": "$",
       "id": "NA",
+      "emoji": "🇳🇦",
       "name": "Namibia"
     },
     "NZ": {
@@ -1139,6 +1276,7 @@ const ratesPacket = {
       "currencyName": "New Zealand dollar",
       "currencySymbol": "$",
       "id": "NZ",
+      "emoji": "🇳🇿",
       "name": "New Zealand"
     },
     "OM": {
@@ -1147,6 +1285,7 @@ const ratesPacket = {
       "currencyName": "Omani rial",
       "currencySymbol": "﷼",
       "id": "OM",
+      "emoji": "🇴🇲",
       "name": "Oman"
     },
     "PY": {
@@ -1155,6 +1294,7 @@ const ratesPacket = {
       "currencyName": "Paraguayan guarani",
       "currencySymbol": "Gs",
       "id": "PY",
+      "emoji": "🇵🇾",
       "name": "Paraguay"
     },
     "PR": {
@@ -1163,6 +1303,7 @@ const ratesPacket = {
       "currencyName": "U.S. Dollar",
       "currencySymbol": "$",
       "id": "PR",
+      "emoji": "🇵🇷",
       "name": "Puerto Rico"
     },
     "SH": {
@@ -1171,6 +1312,7 @@ const ratesPacket = {
       "currencyName": "Saint Helena pound",
       "currencySymbol": "£",
       "id": "SH",
+      "emoji": "🇸🇭",
       "name": "Saint Helena"
     },
     "SM": {
@@ -1179,6 +1321,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "SM",
+      "emoji": "🇸🇲",
       "name": "San Marino"
     },
     "SC": {
@@ -1187,6 +1330,7 @@ const ratesPacket = {
       "currencyName": "Seychellois rupee",
       "currencySymbol": "₨",
       "id": "SC",
+      "emoji": "🇸🇨",
       "name": "Seychelles"
     },
     "SB": {
@@ -1195,6 +1339,7 @@ const ratesPacket = {
       "currencyName": "Solomon Islands dollar",
       "currencySymbol": "$",
       "id": "SB",
+      "emoji": "🇸🇧",
       "name": "Solomon Islands"
     },
     "LK": {
@@ -1203,6 +1348,7 @@ const ratesPacket = {
       "currencyName": "Sri Lankan rupee",
       "currencySymbol": "₨",
       "id": "LK",
+      "emoji": "🇱🇰",
       "name": "Sri Lanka"
     },
     "CH": {
@@ -1211,6 +1357,7 @@ const ratesPacket = {
       "currencyName": "Swiss franc",
       "currencySymbol": "Fr.",
       "id": "CH",
+      "emoji": "🇨🇭",
       "name": "Switzerland"
     },
     "TH": {
@@ -1226,6 +1373,7 @@ const ratesPacket = {
       "currencyId": "TRY",
       "currencyName": "Turkish new lira",
       "name": "Turkey",
+      "emoji": "🇹🇷",
       "alpha3": "TUR",
       "id": "TR"
     },
@@ -1233,6 +1381,7 @@ const ratesPacket = {
       "currencyId": "AED",
       "currencyName": "UAE dirham",
       "name": "United Arab Emirates",
+      "emoji": "🇦🇪",
       "alpha3": "ARE",
       "id": "AE"
     },
@@ -1240,6 +1389,7 @@ const ratesPacket = {
       "currencyId": "VUV",
       "currencyName": "Vanuatu vatu",
       "name": "Vanuatu",
+      "emoji": "🚩",
       "alpha3": "VUT",
       "id": "VU"
     },
@@ -1247,6 +1397,7 @@ const ratesPacket = {
       "currencyId": "ZMW",
       "currencyName": "Zambian kwacha",
       "name": "Zambia",
+      "emoji": "🇿🇲",
       "alpha3": "ZMB",
       "id": "ZM"
     },
@@ -1254,6 +1405,7 @@ const ratesPacket = {
       "currencyId": "AOA",
       "currencyName": "Angolan kwanza",
       "name": "Angola",
+      "emoji": "🇦🇴",
       "alpha3": "AGO",
       "id": "AO"
     },
@@ -1263,12 +1415,14 @@ const ratesPacket = {
       "currencyName": "Aruban florin",
       "currencySymbol": "ƒ",
       "id": "AW",
-      "name": "Aruba"
+      "name": "Aruba",
+      "emoji": "🇦🇼"
     },
     "BH": {
       "currencyId": "BHD",
       "currencyName": "Bahraini dinar",
       "name": "Bahrain",
+      "emoji": "🇧🇭",
       "alpha3": "BHR",
       "id": "BH"
     },
@@ -1278,7 +1432,8 @@ const ratesPacket = {
       "currencyName": "Belize dollar",
       "currencySymbol": "BZ$",
       "id": "BZ",
-      "name": "Belize"
+      "name": "Belize",
+      "emoji": "🇧🇿"
     },
     "BW": {
       "alpha3": "BWA",
@@ -1286,6 +1441,7 @@ const ratesPacket = {
       "currencyName": "Botswana pula",
       "currencySymbol": "P",
       "id": "BW",
+      "emoji": "🇧🇼",
       "name": "Botswana"
     },
     "BI": {
@@ -1293,12 +1449,14 @@ const ratesPacket = {
       "currencyName": "Burundi franc",
       "name": "Burundi",
       "alpha3": "BDI",
+      "emoji": "🇧🇮",
       "id": "BI"
     },
     "CF": {
       "currencyId": "XAF",
       "currencyName": "Central African CFA franc",
       "name": "Central African Republic",
+      "emoji": "🇨🇫",
       "alpha3": "CAF",
       "id": "CF"
     },
@@ -1306,6 +1464,7 @@ const ratesPacket = {
       "currencyId": "KMF",
       "currencyName": "Comorian franc",
       "name": "Comoros",
+      "emoji": "🇰🇲",
       "alpha3": "COM",
       "id": "KM"
     },
@@ -1315,6 +1474,7 @@ const ratesPacket = {
       "currencyName": "Croatian kuna",
       "currencySymbol": "kn",
       "id": "HR",
+      "emoji": "🇭🇷",
       "name": "Croatia"
     },
     "DJ": {
@@ -1322,6 +1482,7 @@ const ratesPacket = {
       "currencyName": "Djiboutian franc",
       "name": "Djibouti",
       "alpha3": "DJI",
+      "emoji": "🇩🇯",
       "id": "DJ"
     },
     "SV": {
@@ -1330,6 +1491,7 @@ const ratesPacket = {
       "currencyName": "U.S. Dollar",
       "currencySymbol": "$",
       "id": "SV",
+      "emoji": "🇸🇻",
       "name": "El Salvador"
     },
     "FJ": {
@@ -1338,6 +1500,7 @@ const ratesPacket = {
       "currencyName": "Fijian dollar",
       "currencySymbol": "$",
       "id": "FJ",
+      "emoji": "🇫🇯",
       "name": "Fiji"
     },
     "GM": {
@@ -1345,6 +1508,7 @@ const ratesPacket = {
       "currencyName": "Gambian dalasi",
       "name": "Gambia",
       "alpha3": "GMB",
+      "emoji": "🇬🇲",
       "id": "GM"
     },
     "GR": {
@@ -1353,6 +1517,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "GR",
+      "emoji": "🇬🇷",
       "name": "Greece"
     },
     "GY": {
@@ -1361,6 +1526,7 @@ const ratesPacket = {
       "currencyName": "Guyanese dollar",
       "currencySymbol": "$",
       "id": "GY",
+      "emoji": "🇬🇾",
       "name": "Guyana"
     },
     "IS": {
@@ -1369,6 +1535,7 @@ const ratesPacket = {
       "currencyName": "Icelandic króna",
       "currencySymbol": "kr",
       "id": "IS",
+      "emoji": "🇮🇸",
       "name": "Iceland"
     },
     "IE": {
@@ -1377,6 +1544,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "IE",
+      "emoji": "🇮🇪",
       "name": "Ireland"
     },
     "JO": {
@@ -1384,6 +1552,7 @@ const ratesPacket = {
       "currencyName": "Jordanian dinar",
       "name": "Jordan",
       "alpha3": "JOR",
+      "emoji": "🇯🇴",
       "id": "JO"
     },
     "KR": {
@@ -1392,6 +1561,7 @@ const ratesPacket = {
       "currencyName": "South Korean won",
       "currencySymbol": "₩",
       "id": "KR",
+      "emoji": "🇰🇷",
       "name": "Korea South"
     },
     "LB": {
@@ -1400,6 +1570,7 @@ const ratesPacket = {
       "currencyName": "Lebanese lira",
       "currencySymbol": "£",
       "id": "LB",
+      "emoji": "🇱🇧",
       "name": "Lebanon"
     },
     "MW": {
@@ -1407,12 +1578,14 @@ const ratesPacket = {
       "currencyName": "Malawian kwacha",
       "name": "Malawi",
       "alpha3": "MWI",
+      "emoji": "🇲🇼",
       "id": "MW"
     },
     "MR": {
       "currencyId": "MRO",
       "currencyName": "Mauritanian ouguiya",
       "name": "Mauritania",
+      "emoji": "🇲🇷",
       "alpha3": "MRT",
       "id": "MR"
     },
@@ -1422,6 +1595,7 @@ const ratesPacket = {
       "currencyName": "European Euro",
       "currencySymbol": "€",
       "id": "MC",
+      "emoji": "🇲🇨",
       "name": "Monaco"
     },
     "MZ": {
@@ -1429,6 +1603,7 @@ const ratesPacket = {
       "currencyName": "Mozambican metical",
       "name": "Mozambique",
       "alpha3": "MOZ",
+      "emoji": "🇲🇿",
       "id": "MZ"
     },
     "NL": {
@@ -1437,6 +1612,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "NL",
+      "emoji": "🇳🇱",
       "name": "Netherlands"
     },
     "NG": {
@@ -1445,6 +1621,7 @@ const ratesPacket = {
       "currencyName": "Nigerian naira",
       "currencySymbol": "₦",
       "id": "NG",
+      "emoji": "🇳🇬",
       "name": "Nigeria"
     },
     "PA": {
@@ -1453,6 +1630,7 @@ const ratesPacket = {
       "currencyName": "Panamanian balboa",
       "currencySymbol": "B/.",
       "id": "PA",
+      "emoji": "🇵🇦",
       "name": "Panama"
     },
     "PL": {
@@ -1461,6 +1639,7 @@ const ratesPacket = {
       "currencyName": "Polish zloty",
       "currencySymbol": "zł",
       "id": "PL",
+      "emoji": "🇵🇱",
       "name": "Poland"
     },
     "RU": {
@@ -1469,6 +1648,7 @@ const ratesPacket = {
       "currencyName": "Russian ruble",
       "currencySymbol": "руб",
       "id": "RU",
+      "emoji": "🇷🇺",
       "name": "Russia"
     },
     "VC": {
@@ -1477,6 +1657,7 @@ const ratesPacket = {
       "currencyName": "East Caribbean dollar",
       "currencySymbol": "$",
       "id": "VC",
+      "emoji": "🇻🇨",
       "name": "Saint Vincent and the Grenadines"
     },
     "SN": {
@@ -1484,6 +1665,7 @@ const ratesPacket = {
       "currencyName": "West African CFA franc",
       "name": "Senegal",
       "alpha3": "SEN",
+      "emoji": "🇸🇳",
       "id": "SN"
     },
     "SK": {
@@ -1492,6 +1674,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "SK",
+      "emoji": "🇸🇰",
       "name": "Slovakia"
     },
     "SS": {
@@ -1499,6 +1682,7 @@ const ratesPacket = {
       "currencyName": "Sudanese pound",
       "name": "South Sudan",
       "alpha3": "SSD",
+      "emoji": "🇸🇸",
       "id": "SS"
     },
     "SZ": {
@@ -1506,6 +1690,7 @@ const ratesPacket = {
       "currencyName": "Swazi lilangeni",
       "name": "Swaziland",
       "alpha3": "SWZ",
+      "emoji": "🇸🇿",
       "id": "SZ"
     },
     "TJ": {
@@ -1513,6 +1698,7 @@ const ratesPacket = {
       "currencyName": "Tajikistani somoni",
       "name": "Tajikistan",
       "alpha3": "TJK",
+      "emoji": "🇹🇯",
       "id": "TJ"
     },
     "TT": {
@@ -1521,6 +1707,7 @@ const ratesPacket = {
       "currencyName": "Trinidad and Tobago dollar",
       "currencySymbol": "TT$",
       "id": "TT",
+      "emoji": "🇹🇹",
       "name": "Trinidad and Tobago"
     },
     "UG": {
@@ -1529,6 +1716,7 @@ const ratesPacket = {
       "currencyName": "Ugandan shilling",
       "currencySymbol": "USh",
       "id": "UG",
+      "emoji": "🇺🇬",
       "name": "Uganda"
     },
     "UY": {
@@ -1537,6 +1725,7 @@ const ratesPacket = {
       "currencyName": "Uruguayan peso",
       "currencySymbol": "$U",
       "id": "UY",
+      "emoji": "🇺🇾",
       "name": "Uruguay"
     },
     "WF": {
@@ -1544,6 +1733,7 @@ const ratesPacket = {
       "currencyName": "CFP franc",
       "name": "Wallis and Futuna Islands",
       "alpha3": "WLF",
+      "emoji": "🇼🇫",
       "id": "WF"
     },
     "LT": {
@@ -1552,6 +1742,7 @@ const ratesPacket = {
       "currencyName": "European euro",
       "currencySymbol": "€",
       "id": "LT",
+      "emoji": "🇱🇹",
       "name": "Lithuania"
     }
   }

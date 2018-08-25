@@ -11,9 +11,9 @@ export default class ClearInputButton extends Component {
     
     render() {
         return (
-            <TouchableHighlight 
+            <TouchableHighlight
                 style={[Style.keypadClear, this.props.highlight ? Style.inputButtonHighlighted : null]}
-                underlayColor="#193441"
+                underlayColor="#999"
                 onPress={this.props.onPress}>                
                 <Text style={Style.numOp}>{this.props.value}</Text>
             </TouchableHighlight>
