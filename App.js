@@ -1,10 +1,7 @@
 import React from 'react';
 import { 
-  Accelerometer,
-  Modal,
-  Vibration,
-  TextInput,
   Animated,
+  NetInfo,
   StyleSheet, 
   Text, 
   View,
@@ -14,7 +11,6 @@ import {
   Button,
   TouchableWithoutFeedback,
   Dimensions,
-  Keyboard,
   TouchableOpacity
 } from 'react-native';
 
@@ -26,6 +22,7 @@ import {
   LinearGradient
 } from 'expo';
 
+import Swiper from 'react-native-swiper';
 import Style from './Style';
 import InputButton from './InputButton';
 import InputButtonFat from './InputButtonFat';
@@ -33,6 +30,7 @@ import ClearInputButton from './ClearInputButton';
 import ratesPacket from './rates';
 import currencyPacket from './currency';
 import swapImg from './swap.png';
+// import TitleText from './TitleText';
 
 const { width: WindowWidth } = Dimensions.get('window');
 
@@ -77,7 +75,10 @@ export default class App extends React.Component {
       selected:'from',
       bitcoin:0,
       countryPacket:{},
-      list:'🏡'
+      list:'🏡',
+      offline:0,
+      connection:0,
+      dev:0,
     };
   }
 
@@ -108,9 +109,29 @@ export default class App extends React.Component {
 
   };
 
+  handleConnectivityChange = isConnected => {
+    if (isConnected) {
+      this.setState({
+        connection:0
+      })
+    } else {
+      this.setState({
+        connection:1
+      })
+    }
+  };
+
   componentWillMount(){
-    this.bitCoin();
-    this.updateCurrencyPacket();
+    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
+
+    if(this.state.connection || this.state.dev) { 
+      this.setState({
+        offline:1
+      })
+      this.updateCurrencyPacket('offline');
+    }else{
+      this.updateCurrencyPacket('online');
+    }
 
     if (!AsyncStorage.getItem('toCountry')) {
       this.toCountryCurrency = 'USD'
@@ -133,7 +154,7 @@ export default class App extends React.Component {
       })
     }).catch(function(){
     })
-  };
+  };        
 
   pickRandomProperty(obj) {
     var result;
@@ -144,27 +165,24 @@ export default class App extends React.Component {
     return result;
   }
 
-  offlineMode(){
-    let that = this
-    that.setState({
-      offlineMode: true
-    })
-  };
-
-  async updateCurrencyPacket() {
+  async updateCurrencyPacket(x) {
     let that = this
     let rates = "https://openexchangerates.org/api/latest.json?app_id=9c7cb94c795045bcbd7acd369010b544"
 
-    await fetch(rates)
-      .then((resp) => resp.json())
-      .then(function (data) {
-        that.setState({
-        currencyPacket: data,
+    if(x === 'offline'){
+      that.loadPosition()
+    }else{
+      console.log(x)
+       await fetch(rates)
+        .then((resp) => resp.json())
+        .then(function (data) {
+          that.setState({
+            currencyPacket: data,
+          })
+        }).catch(function () {
         })
-      }).catch(function () {
-        that.offlineMode()
-      })
-      await this.loadPosition()
+        this.loadPosition()
+      }
   }
 
   async countryFromCountryCode(country) {
@@ -174,20 +192,20 @@ export default class App extends React.Component {
     await fetch(countries)
     .then((resp) => resp.json())
     .then(function (data) {
-        if(that.state.toCountryCode === 'BTN'){
-        }
       that.setState({ 
         toCountryEmoji: ratesPacket.results[that.state.toCountryCode].emoji,
         toCountryCurrency: ratesPacket.results[that.state.toCountryCode].currencyId,
         toCountryCurrencyName: ratesPacket.results[that.state.toCountryCode].currencyName,
+        fromCountryName: ratesPacket.results[that.state.toCountryCode].name,
         toSymbol: ratesPacket.results[that.state.toCountryCode].currencySymbol,
         fromCountryCurrency: ratesPacket.results[that.state.fromCountryCode].currencyId,
         fromCountryEmoji: ratesPacket.results[that.state.fromCountryCode].emoji,
         fromCountryCurrencyName: ratesPacket.results[that.state.fromCountryCode].currencyName,
+        fromCountryName: ratesPacket.results[that.state.fromCountryCode].name,
         fromSymbol: ratesPacket.results[that.state.fromCountryCode].currencySymbol,
         offlineMode:false
       })
-        that.countryToRate()
+      that.countryToRate()
       })
   };
 
@@ -238,6 +256,9 @@ export default class App extends React.Component {
       this.countryFromCountryCode(country)
     } 
     else {
+      this.setState({
+        fromValue:0
+      })
       this.countryFromCountryCode(country)
     }
   };
@@ -390,6 +411,11 @@ export default class App extends React.Component {
   render() {
 
     return (
+      <Swiper
+        showsPagination={false}
+        loop={false}
+      >
+
       <View style={Style.container} >
         <Image
           id="map"
@@ -404,13 +430,14 @@ export default class App extends React.Component {
           source={{ uri: this.state.map }}
           blurRadius={1.4}
         />
-
+        
         <LinearGradient 
           start = {[0.1, 0.1]}
           colors = {['rgba(11, 131, 254, .5)', '#3713AE']}
           style={Style.sentence}
         >
-
+        
+      
           { /* FROM CURRENCY */ }
           <View style={Style.inputs}>
             <TouchableOpacity
@@ -466,7 +493,7 @@ export default class App extends React.Component {
             </Text>
           </View>
           {/* UPDATE */}
-          <Text style={{color:'#fff5',textAlign:'center',alignSelf:'center'}}>{this.state.backup}</Text>
+          <Text style={{color:'#fff5',textAlign:'center',alignSelf:'center'}}>{this.state.backup} {this.state.offline ? 'dev' : ''}</Text>
 
             <View style={Style.calculatorPanel}>
               <View >
@@ -478,6 +505,62 @@ export default class App extends React.Component {
 
       {this._maybeRenderModal()}
       </View>
+      <View style={Style.container} >
+        <Image
+          id="map"
+          style={{ 
+            backgroundColor: '#ccc',
+            flex: 1,
+            position: 'absolute',
+            width: '100%',
+            height: 800,
+            justifyContent: 'center',
+          }}
+          source={{ uri: this.state.map }}
+          blurRadius={1.4}
+        />
+        
+        <LinearGradient 
+          start = {[0.1, 0.1]}
+          colors = {['rgba(11, 131, 254, .5)', '#3713AE']}
+          style={Style.sentence}
+        >
+          <View style={Style.inputs}>
+            <View style={{padding:10}}>
+              <Text style={Style.hello}>
+                Welcome to
+              </Text>
+              <Text           
+                style={{width:'90%',fontSize:50, color:'white',fontWeight:'bold'}}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}
+                minimumFontScale={0.01}
+              >
+                {this.state.fromCountryName + " " + this.state.fromCountryEmoji}
+              </Text>
+            </View>
+            <View  style={Style.bold}>
+              <Text                 
+                adjustsFontSizeToFit={true}
+                numberOfLines={3}
+                minimumFontScale={0.01} 
+                style={Style.helloSubtext}
+              >
+                The local currency is the <Text style={{fontWeight:'bold'}}>{this.state.fromCountryCurrencyName}</Text> which is <Text style={{fontWeight:'bold'}}>{Number(this.state.rate).toFixed(2)} </Text> {this.state.fromCountryCurrency} to<Text style={{fontWeight:'bold'}}> 1</Text> {this.state.toCountryCurrency}</Text>
+            </View>
+            <View style={{justifyContent:'space-around',padding:10,paddingLeft:20,paddingRight:20,backgroundColor:'#0002',borderRadius:10,margin:10}}>
+              {[1,5,10,20,50,100].map((num) => {
+                return(
+                <View style={{justifyContent:'space-between',flexDirection:'row'}}>
+                  <Text adjustsFontSizeToFit={true} style={Style.helloNumbers}>{this.state.toSymbol} <Text style={Style.helloBold}>{num}</Text> {this.state.toCountryCurrency}</Text>
+                  <Text adjustsFontSizeToFit={true} style={Style.helloNumbers}>{this.state.fromSymbol} <Text style={Style.helloBold}>{Number(this.state.fromValue * num).toFixed(2)} </Text>{this.state.fromCountryCurrency}</Text>
+                </View>)
+              })}
+            </View>
+          </View>  
+        </LinearGradient>
+      </View>
+      </Swiper>
     );
   }
 
@@ -707,7 +790,6 @@ _handleNumberInput(num) {
               if(this.state.list === '🏡'){
                 return (<Picker.Item label={name} value={key} key={key}/>)
               }
-              
             })}
             <Picker.Item label="Mexico 🇲🇽" value="MX" />
             <Picker.Item label="Sweden 🇸🇪" value="SE" />

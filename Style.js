@@ -20,7 +20,7 @@ location: {
     fontWeight: 'bold',
     fontSize: 60,
     color: 'black',
-    padding: 10
+    padding: 15
   },
   sentence: {
     justifyContent:'space-between',
@@ -89,15 +89,32 @@ location: {
     paddingRight:3,
     paddingLeft:3
   },
+  hello:{
+    color:'white',
+    fontSize:50,
+    fontWeight:'bold'
+  },
+  helloSubtext:{
+    fontWeight:'200',
+    fontSize:24,
+    color:'white'
+  },
+  helloBold:{
+    fontWeight:'bold',
+    fontSize:28,
+    color:'#fff'
+  },
+  helloNumbers:{
+    fontSize:22,
+    color:'#fff9'
+  },
   list:{
     padding:5,
     backgroundColor:'white',
-    // backgroundColor: '#314A9D',
     borderRadius:50,
     marginRight:15
   },
   toolbarRight: {
-    // alignSelf: 'flex-end',
   },
   keypad: {
     padding: 8,
