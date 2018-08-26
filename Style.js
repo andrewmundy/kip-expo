@@ -95,18 +95,19 @@ location: {
     fontWeight:'bold'
   },
   helloSubtext:{
-    fontWeight:'200',
+    fontWeight:'300',
     fontSize:24,
     color:'white'
   },
   helloBold:{
     fontWeight:'bold',
-    fontSize:28,
+    // fontSize:28,
     color:'#fff'
   },
   helloNumbers:{
-    fontSize:22,
-    color:'#fff9'
+    color:'#fff9',
+    fontSize:24,
+    width:'48%'
   },
   list:{
     padding:5,

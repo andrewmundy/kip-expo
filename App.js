@@ -30,7 +30,6 @@ import ClearInputButton from './ClearInputButton';
 import ratesPacket from './rates';
 import currencyPacket from './currency';
 import swapImg from './swap.png';
-// import TitleText from './TitleText';
 
 const { width: WindowWidth } = Dimensions.get('window');
 
@@ -52,10 +51,10 @@ export default class App extends React.Component {
       longitude: "0",
       rate: "0",
       initializing: "true",
-      fromCountryCurrencyName:'Thai Baht',
-      fromCountryName: 'Thailand',
-      fromCountryCurrency: 'THB',
-      fromCountryCode: 'TH', 
+      fromCountryCurrencyName:'',
+      fromCountryName: '',
+      fromCountryCurrency: '',
+      fromCountryCode: '', 
       fromValue: "",
       fromSymbol: '',
       toCountryCurrencyName: 'United States dollar',
@@ -70,15 +69,14 @@ export default class App extends React.Component {
       offlineMode:false,
       allCountryCodes:"",
       backup:'',
-      currencyPacket:currencyPacket,
+      currencyPacket:'',
       currentLocation:'',
       selected:'from',
-      bitcoin:0,
       countryPacket:{},
       list:'🏡',
       offline:0,
       connection:0,
-      dev:0,
+      dev:1,
     };
   }
 
@@ -106,7 +104,28 @@ export default class App extends React.Component {
   };
 
   componentDidMount(){
+  };
 
+  _storeData = async (data) => {
+    try {
+      AsyncStorage.setItem('data', data);
+    } catch (error) {
+      console.log('oops')
+    }
+  };
+
+  _retrieveData = async (x) => {
+    try {
+      const value = await AsyncStorage.getItem('data');
+      
+      if (x === 'offline') {
+        this.setState({
+          currencyPacket: JSON.parse(value)
+        })
+        await this.countryFromCountryCode()
+      }
+     } catch (error) {
+     }
   };
 
   handleConnectivityChange = isConnected => {
@@ -132,15 +151,9 @@ export default class App extends React.Component {
     }else{
       this.updateCurrencyPacket('online');
     }
-
-    if (!AsyncStorage.getItem('toCountry')) {
-      this.toCountryCurrency = 'USD'
-    } else {
-      this.toCountryCurrency = AsyncStorage.getItem('toCountry')
-    }
   };
 
-  async createMap() {
+ createMap = async () => {
     let that = this
     let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + that.state.latitude + "," + that.state.longitude + "&result_type=country&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE"
     // let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=37.4224764,-122.0842499&result_type=country&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE"
@@ -154,69 +167,58 @@ export default class App extends React.Component {
       })
     }).catch(function(){
     })
+    this.countryFromCountryCode()
   };        
-
-  pickRandomProperty(obj) {
-    var result;
-    var count = 0;
-    for (var prop in obj)
-      if (Math.random() < 1 / ++count)
-        result = prop;
-    return result;
-  }
 
   async updateCurrencyPacket(x) {
     let that = this
     let rates = "https://openexchangerates.org/api/latest.json?app_id=9c7cb94c795045bcbd7acd369010b544"
 
     if(x === 'offline'){
+      console.log('currencyPacket')
+      that._retrieveData('offline')
       that.loadPosition()
     }else{
-      console.log(x)
        await fetch(rates)
         .then((resp) => resp.json())
         .then(function (data) {
+          that._storeData(JSON.stringify(data))
           that.setState({
             currencyPacket: data,
           })
         }).catch(function () {
         })
-        this.loadPosition()
+        that.loadPosition()
       }
+    // that._retrieveData()
   }
 
-  async countryFromCountryCode(country) {
+  countryFromCountryCode = async () => {
     let that = this
-    let countries = "https://maps.googleapis.com/maps/api/geocode/json?latlng=37.4224764,-122.0842499&result_type=country&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE"
-
-    await fetch(countries)
-    .then((resp) => resp.json())
-    .then(function (data) {
-      that.setState({ 
-        toCountryEmoji: ratesPacket.results[that.state.toCountryCode].emoji,
-        toCountryCurrency: ratesPacket.results[that.state.toCountryCode].currencyId,
-        toCountryCurrencyName: ratesPacket.results[that.state.toCountryCode].currencyName,
-        fromCountryName: ratesPacket.results[that.state.toCountryCode].name,
-        toSymbol: ratesPacket.results[that.state.toCountryCode].currencySymbol,
-        fromCountryCurrency: ratesPacket.results[that.state.fromCountryCode].currencyId,
-        fromCountryEmoji: ratesPacket.results[that.state.fromCountryCode].emoji,
-        fromCountryCurrencyName: ratesPacket.results[that.state.fromCountryCode].currencyName,
-        fromCountryName: ratesPacket.results[that.state.fromCountryCode].name,
-        fromSymbol: ratesPacket.results[that.state.fromCountryCode].currencySymbol,
-        offlineMode:false
-      })
-      that.countryToRate()
-      })
+    // await console.log(that.state.fromCountryCode)
+    await that.setState({ 
+      toCountryEmoji: ratesPacket.results[that.state.toCountryCode].emoji,
+      toCountryCurrency: ratesPacket.results[that.state.toCountryCode].currencyId,
+      toCountryCurrencyName: ratesPacket.results[that.state.toCountryCode].currencyName,
+      fromCountryName: ratesPacket.results[that.state.toCountryCode].name,
+      toSymbol: ratesPacket.results[that.state.toCountryCode].currencySymbol,
+      fromCountryCurrency: ratesPacket.results[that.state.fromCountryCode].currencyId,
+      fromCountryEmoji: ratesPacket.results[that.state.fromCountryCode].emoji,
+      fromCountryCurrencyName: ratesPacket.results[that.state.fromCountryCode].currencyName,
+      fromCountryName: ratesPacket.results[that.state.fromCountryCode].name,
+      fromSymbol: ratesPacket.results[that.state.fromCountryCode].currencySymbol,
+      offlineMode:false
+    })
+    await that.countryToRate()
   };
 
   coordToCountry() {
     this.setState({
       map: "https://maps.googleapis.com/maps/api/staticmap?center=" + this.state.latitude + "," + this.state.longitude + "&zoom=10&size=350x800&sensor=false&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0x1d2c4d&style=element:labels.text.fill%7Ccolor:0x8ec3b9&style=element:labels.text.stroke%7Ccolor:0x1a3646&style=feature:administrative.country%7Celement:geometry.stroke%7Ccolor:0x4b6878&style=feature:administrative.land_parcel%7Celement:labels.text.fill%7Ccolor:0x64779e&style=feature:administrative.province%7Celement:geometry.stroke%7Ccolor:0x4b6878&style=feature:landscape.man_made%7Celement:geometry.stroke%7Ccolor:0x334e87&style=feature:landscape.natural%7Celement:geometry%7Ccolor:0x023e58&style=feature:poi%7Celement:geometry%7Ccolor:0x283d6a&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x6f9ba5&style=feature:poi%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:poi.park%7Celement:geometry.fill%7Ccolor:0x023e58&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x3C7680&style=feature:road%7Celement:geometry%7Ccolor:0x304a7d&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x98a5be&style=feature:road%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:road.highway%7Celement:geometry%7Ccolor:0x2c6675&style=feature:road.highway%7Celement:geometry.stroke%7Ccolor:0x255763&style=feature:road.highway%7Celement:labels.text.fill%7Ccolor:0xb0d5ce&style=feature:road.highway%7Celement:labels.text.stroke%7Ccolor:0x023e58&style=feature:transit%7Celement:labels.text.fill%7Ccolor:0x98a5be&style=feature:transit%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:transit.line%7Celement:geometry.fill%7Ccolor:0x283d6a&style=feature:transit.station%7Celement:geometry%7Ccolor:0x3a4762&style=feature:water%7Celement:geometry%7Ccolor:0x0e1626&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x4e6d70&size=480x360"
     })
-    this.countryFromCountryCode()
   };
 
-  countryToRate(...args) {
+  countryToRate = async (...args) => {
     let that = this
     let from = that.state.fromCountryCurrency
     let to = that.state.toCountryCurrency
@@ -531,7 +533,7 @@ export default class App extends React.Component {
                 Welcome to
               </Text>
               <Text           
-                style={{width:'90%',fontSize:50, color:'white',fontWeight:'bold'}}
+                style={{width:'95%',fontSize:50, color:'white',fontWeight:'bold',margin:10}}
                 adjustsFontSizeToFit={true}
                 numberOfLines={1}
                 minimumFontScale={0.01}
@@ -542,18 +544,55 @@ export default class App extends React.Component {
             <View  style={Style.bold}>
               <Text                 
                 adjustsFontSizeToFit={true}
-                numberOfLines={3}
+                numberOfLines={4}
                 minimumFontScale={0.01} 
                 style={Style.helloSubtext}
               >
-                The local currency is the <Text style={{fontWeight:'bold'}}>{this.state.fromCountryCurrencyName}</Text> which is <Text style={{fontWeight:'bold'}}>{Number(this.state.rate).toFixed(2)} </Text> {this.state.fromCountryCurrency} to<Text style={{fontWeight:'bold'}}> 1</Text> {this.state.toCountryCurrency}</Text>
+               The local currency is the {"\n"}
+                <Text style={{fontWeight:'bold',fontSize:35}}>
+                  {this.state.fromCountryCurrencyName + " "}
+                </Text> 
+                which is {"\n"}
+                <Text style={{fontWeight:'bold',fontSize:35}}>
+                  {Number(this.state.rate).toFixed(2)}
+                </Text> 
+                {" " + this.state.fromCountryCurrency + " "} to
+                <Text style={{fontWeight:'bold',fontSize:35}}> 
+                {" "}1 
+                </Text> 
+                { " " + this.state.toCountryCurrency}
+              </Text>
             </View>
             <View style={{justifyContent:'space-around',padding:10,paddingLeft:20,paddingRight:20,backgroundColor:'#0002',borderRadius:10,margin:10}}>
               {[1,5,10,20,50,100].map((num) => {
                 return(
-                <View style={{justifyContent:'space-between',flexDirection:'row'}}>
-                  <Text adjustsFontSizeToFit={true} style={Style.helloNumbers}>{this.state.toSymbol} <Text style={Style.helloBold}>{num}</Text> {this.state.toCountryCurrency}</Text>
-                  <Text adjustsFontSizeToFit={true} style={Style.helloNumbers}>{this.state.fromSymbol} <Text style={Style.helloBold}>{Number(this.state.fromValue * num).toFixed(2)} </Text>{this.state.fromCountryCurrency}</Text>
+                <View 
+                  style={{justifyContent:'space-between',flexDirection:'row',alignItems:'center'}}
+                >
+                  <Text                   
+                    adjustsFontSizeToFit={true}
+                    minimumFontScale={0.01} 
+                    numberOfLines={1}
+                    style={Style.helloNumbers}
+                  >
+                    {this.state.toSymbol} 
+                    <Text style={{color:'white',fontWeight:'bold'}}>
+                      {" " + num + " "} 
+                    </Text>
+                    {this.state.toCountryCurrency}
+                  </Text> 
+                  <Text 
+                    adjustsFontSizeToFit={true}
+                    minimumFontScale={0.01} 
+                    numberOfLines={1}
+                    style={Style.helloNumbers}
+                  >
+                    {this.state.fromSymbol}
+                    <Text style={{color:'white',fontWeight:'bold'}}>
+                      {" " + Number(this.state.fromValue * num).toFixed(2) + " "} 
+                    </Text>  
+                      {this.state.fromCountryCurrency}
+                  </Text>
                 </View>)
               })}
             </View>
