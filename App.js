@@ -30,6 +30,7 @@ import ClearInputButton from './ClearInputButton';
 import ratesPacket from './rates';
 import currencyPacket from './currency';
 import swapImg from './swap.png';
+import { TextInput } from 'react-native-gesture-handler';
 
 const { width: WindowWidth } = Dimensions.get('window');
 
@@ -76,7 +77,12 @@ export default class App extends React.Component {
       list:'🏡',
       offline:0,
       connection:0,
-      dev:1,
+      dev:0,
+      lang:'',
+      hello:'hello',
+      translate:'hello',
+      quickTranslate:'',
+      quickTranslateResult:''
     };
   }
 
@@ -141,6 +147,7 @@ export default class App extends React.Component {
   };
 
   componentWillMount(){
+
     NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
 
     if(this.state.connection || this.state.dev) { 
@@ -157,6 +164,7 @@ export default class App extends React.Component {
     let that = this
     let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + that.state.latitude + "," + that.state.longitude + "&result_type=country&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE"
     // let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=37.4224764,-122.0842499&result_type=country&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE"
+    // console.log(`${that} ${this}`)
     await fetch(url)
     .then((resp) => resp.json())
     .then(function (data) {
@@ -210,6 +218,7 @@ export default class App extends React.Component {
       offlineMode:false
     })
     await that.countryToRate()
+    await that.completeTrans()
   };
 
   coordToCountry() {
@@ -393,11 +402,6 @@ export default class App extends React.Component {
     this._handlePressDone('CRL')
   };
 
-  calculator(x){
-    let calculation = x
-    alert(calculation)
-  }
-
   touchFrom = () => {
     this.setState({
       selected:'from'
@@ -408,6 +412,60 @@ export default class App extends React.Component {
     this.setState({
       selected:'to'
     })
+  }
+
+  completeTrans = async () =>{
+    await this.findLang()
+  }
+
+  findLang = async () => {
+    console.log(this.state.fromCountryCode)
+    let url = `https://restcountries.eu/rest/v2/alpha/${this.state.fromCountryCode}`
+    let that = this
+
+    fetch(url)
+    .then(res => res.json())
+    .then(async (data) => {
+      await that.setState({
+        lang: data.languages[0].iso639_1
+      })
+      await that.translate()
+    })
+  };
+  stringthing = (string) => {
+    return string + "thing"
+  }
+
+  translate = () => {
+    let fromLang = 'en';
+    let toLang = this.state.lang;
+    let text = this.state.quickTranslate ? this.state.quickTranslate : this.state.translate;
+    console.log('called')
+    const API_KEY = ['AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE'];
+
+    let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
+    url += '&q=' + encodeURI(text);
+    url += `&source=${fromLang}`;
+    url += `&target=${toLang}`;
+
+    return fetch(url, { 
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then((response) => {
+      let whichState = this.state.quickTranslate ? "quickTranslateResult" : "hello"
+      console.log(whichState)
+      this.setState({
+        [whichState]: response.data.translations[0].translatedText
+      })
+    })
+    .catch(error => {
+      console.log("There was an error with the translation request: ", error);
+    });
   }
 
   render() {
@@ -446,9 +504,9 @@ export default class App extends React.Component {
               style={{justifyContent:'space-around', alignItems:'center',flexDirection:'row', width:'90%'}}
             >
               <Text
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}
-              minimumFontScale={0.01}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}
+                minimumFontScale={0.01}
                 style={[this.state.selected === 'from'? Style.from : Style.to, Style.adjust]}
                 onPress={this.touchFrom}
               >
@@ -529,17 +587,23 @@ export default class App extends React.Component {
         >
           <View style={Style.inputs}>
             <View style={{padding:10}}>
-              <Text style={Style.hello}>
-                Welcome to
+              <Text 
+                style={Style.hello}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}
+                minimumFontScale={0.01}
+              >
+                {this.state.hello.charAt(0).toUpperCase() + this.state.hello.slice(1)} from
               </Text>
               <Text           
-                style={{width:'95%',fontSize:50, color:'white',fontWeight:'bold',margin:10}}
+                style={Style.hello}
                 adjustsFontSizeToFit={true}
                 numberOfLines={1}
                 minimumFontScale={0.01}
               >
                 {this.state.fromCountryName + " " + this.state.fromCountryEmoji}
               </Text>
+
             </View>
             <View  style={Style.bold}>
               <Text                 
@@ -596,6 +660,85 @@ export default class App extends React.Component {
                 </View>)
               })}
             </View>
+          </View>  
+        </LinearGradient>
+      </View>
+      <View style={Style.container} >
+        <Image
+          id="map"
+          style={{ 
+            backgroundColor: '#ccc',
+            flex: 1,
+            position: 'absolute',
+            width: '100%',
+            height: 800,
+            justifyContent: 'center',
+          }}
+          source={{ uri: this.state.map }}
+          blurRadius={1.4}
+        />
+        
+        <LinearGradient 
+          start = {[0.1, 0.1]}
+          colors = {['rgba(11, 131, 254, .5)', '#3713AE']}
+          style={Style.sentence}
+        >
+          <View style={Style.inputs}>
+            <View style={{padding:10}}>
+              <Text           
+                style={{width:'95%',fontSize:50, color:'white',fontWeight:'bold',margin:10}}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}
+                minimumFontScale={0.01}
+              >
+              </Text>
+{/*
+              <View style={Style.pane}>
+              {["hello","bye"].map((num) => {
+                return(
+                <View 
+                  style={{justifyContent:'space-between',flexDirection:'row',alignItems:'center'}}
+                >
+                  <Text                   
+                    adjustsFontSizeToFit={true}
+                    minimumFontScale={0.01} 
+                    numberOfLines={1}
+                    style={Style.helloNumbers}
+                  >
+                    <Text style={{color:'white',fontWeight:'bold'}}>
+                      {num} 
+                    </Text>
+                  </Text> 
+                  <Text 
+                    adjustsFontSizeToFit={true}
+                    minimumFontScale={0.01} 
+                    numberOfLines={1}
+                    style={Style.helloNumbers}
+                  >
+                    <Text style={{color:'white',fontWeight:'bold'}}>
+                    </Text>  
+                  
+                  </Text>
+                </View>)
+              })}
+              </View>
+    */}
+        <Text style={[Style.hello,{margin:10}]}>{this.state.quickTranslateResult}</Text>
+            <View style={Style.pane}>
+                <TextInput
+                  style={{borderWidth:1,borderRadius:5,borderColor:'#fff2',color:'white',fontSize:30,padding:10}}
+                  onChangeText={(quickTranslate) => {this.setState({quickTranslate}); this.translate; } }
+                  value={this.state.quickTranslate}
+                />
+                <TouchableOpacity style={Style.buttons}  title="translate" onPress={this.translate}>
+                  <View style={Style.location}>
+                    <Text style={{color:'#314a9d',fontSize:16,textAlign:'center',fontWeight: '600',margin: 6}}>
+                      Translate to {(this.state.lang).toUpperCase()}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View> 
           </View>  
         </LinearGradient>
       </View>
@@ -702,9 +845,7 @@ export default class App extends React.Component {
 
     return views;
   }
-  _onInputButtonPressed(input) {
-    alert(input)
-  }
+
   _onInputButtonPressed(input) {
     switch (typeof input) {
         case 'number':

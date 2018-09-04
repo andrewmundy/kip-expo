@@ -1,12 +1,12 @@
 {
   "expo": {
     "name": "Kip",
-    "description": "Location Aware Conversions!",
+    "description": "Satisfying Currency",
     "slug": "kip-expo",
     "privacy": "public",
     "sdkVersion": "28.0.0",
-    "platforms": ["ios", "android"],
-    "version": "1.3",
+    "platforms": ["ios"],
+    "version": "1.4.1",
     "orientation": "portrait",
     "icon": "./logo.png",
     "splash": {

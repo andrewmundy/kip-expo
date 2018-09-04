@@ -28,6 +28,15 @@ location: {
     width: '100%',
     paddingTop: 10,
   },
+  pane:{
+    justifyContent:'space-around',
+    padding:10,
+    paddingLeft:20,
+    paddingRight:20,
+    backgroundColor:'#0002',
+    borderRadius:10,
+    margin:1
+  },
   container: {
     height: '100%',
     backgroundColor: '#000',
