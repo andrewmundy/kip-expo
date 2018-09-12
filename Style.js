@@ -28,6 +28,14 @@ location: {
     width: '100%',
     paddingTop: 10,
   },
+  paneTitle:{
+    fontSize:22,
+    fontWeight:'bold',
+    color:"white",
+    margin:5,
+    marginLeft:10,
+    marginRight:10
+  },
   pane:{
     justifyContent:'space-around',
     padding:10,
@@ -35,7 +43,7 @@ location: {
     paddingRight:20,
     backgroundColor:'#0002',
     borderRadius:10,
-    margin:1
+    margin:10
   },
   container: {
     height: '100%',
@@ -103,10 +111,18 @@ location: {
     fontSize:50,
     fontWeight:'bold'
   },
+  helloForefront:{
+    fontWeight:'bold',
+    fontSize:35,
+    color:'white'
+  },
   helloSubtext:{
     fontWeight:'300',
-    fontSize:24,
-    color:'white'
+    fontSize:22,
+    color:'#fff9',
+    padding:5,
+    paddingBottom:10,
+    textAlign:'center'
   },
   helloBold:{
     fontWeight:'bold',
@@ -114,8 +130,9 @@ location: {
     color:'#fff'
   },
   helloNumbers:{
+    fontWeight:'300',
     color:'#fff9',
-    fontSize:24,
+    fontSize:22,
     width:'48%'
   },
   list:{
