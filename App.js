@@ -29,6 +29,7 @@ import InputButton from './InputButton';
 import InputButtonFat from './InputButtonFat';
 import ClearInputButton from './ClearInputButton';
 import ratesPacket from './rates';
+import shortname from './shortname';
 import currencyPacket from './currency';
 import swapImg from './swap.png';
 import { TextInput } from 'react-native-gesture-handler';
@@ -99,7 +100,6 @@ export default class App extends React.Component {
   };
 
   loadPosition = async () => {
-    
     try {
       const position = await this.getCurrentPosition();
       const { latitude, longitude } = position.coords;
@@ -173,10 +173,10 @@ export default class App extends React.Component {
     await fetch(url)
     .then((resp) => resp.json())
     .then(function (data) {
-      console.log(data.results[0].address_components)
+      let countrycode = shortname.results[data.results[0].address_components[0].short_name]
       that.setState({
         fromCountryName: data.results[0].address_components[0].long_name,
-        fromCountryCode: data.results[0].address_components[0].short_name === "United States" ? "US" : data.results[0].address_components[0].short_name,
+        fromCountryCode: countrycode,
         currentLocation: data.results[0].address_components[0].short_name
       })
     }).catch(function(){
@@ -209,7 +209,7 @@ export default class App extends React.Component {
   countryFromCountryCode = async () => {
     let that = this
     // await console.log(that.state.fromCountryCode)
-    // console.log(ratesPacket.results)
+    console.log(that.state.fromCountryCode)
     await that.setState({ 
       toCountryEmoji: ratesPacket.results[that.state.toCountryCode].emoji,
       toCountryCurrency: ratesPacket.results[that.state.toCountryCode].currencyId,
@@ -223,8 +223,8 @@ export default class App extends React.Component {
       fromSymbol: ratesPacket.results[that.state.fromCountryCode].currencySymbol,
       offlineMode:false
     })
-    await that.countryToRate()
-    await that.completeTrans()
+     that.countryToRate()
+     that.completeTrans()
   };
 
   coordToCountry() {
@@ -274,18 +274,12 @@ export default class App extends React.Component {
         [whichMode]:this.state.currentLocation
       })
     this.countryFromCountryCode()
-
-    } else if(country === 'BTN'){
-      this.setState({
-        [whichMode]:100
-      })
-      this.countryFromCountryCode(country)
-    } 
-    else {
+    }else {
       this.setState({
         fromValue:0,
         quickTranslateResult:'',
-        quickTranslate:''
+        quickTranslate:'',
+        transArrayResult:[]
       })
       this.countryFromCountryCode(country)
     }
@@ -386,9 +380,11 @@ export default class App extends React.Component {
     });
   };
   expand = () => {
+    let mode = this.state.whichModal
     if(this.state.list === '🏡'){
       this.setState({
-        list:'🌍'
+        list:'🌍',
+        [mode]:'US'
       })
     }else{
       this.setState({
@@ -436,27 +432,20 @@ export default class App extends React.Component {
       await that.translateArr()
     })
   };
-  stringthing = (string) => {
-    return string + "thing"
-  }
 
   translateQuick(){
     this.translate('quick')
-  }
-
-  translateArray(){
-    this.translate('translateArray')
   }
 
   translateHello(){
     this.translate('hello')
   }
 
-  translateArr = (x) => {
+  translateArr = async (x) => {
     let fromLang = 'en';
     let toLang = this.state.lang;
     let text = this.state.transArray
-
+    console.log("ji")
     const API_KEY = ['AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE'];
 
     if(fromLang === toLang){
@@ -465,12 +454,13 @@ export default class App extends React.Component {
       })
     }
 
-    text.map(async (word,i) => {
+    text.map( async(word) => {
+      console.log(word)
       let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
       url += '&q=' + encodeURI(word);
       url += `&source=${fromLang}`;
       url += `&target=${toLang}`;
-
+      
       fetch(url, { 
         method: 'GET',
         headers: {
@@ -480,15 +470,16 @@ export default class App extends React.Component {
       })
       .then(res => res.json())
       .then((response) => {
-        const newArr = this.state.transArrayResult.slice()
-        newArr.unshift(response.data.translations[0].translatedText)
+        let newArr = this.state.transArrayResult.slice()
+        
+        console.log(newArr)
+
+        newArr.push(response.data.translations[0].translatedText)
         this.setState({
           transArrayResult: newArr
         })
+        // return response.data..translations[0].translatedTex
       })
-      .catch(error => {
-        console.log("There was an error with the translation request: ", error);
-      });
     })
   }
 
@@ -732,7 +723,7 @@ export default class App extends React.Component {
                     style={Style.helloNumbers}
                   >
                     <Text style={{color:'white',fontWeight:'bold'}}>
-                      {this.state.transArrayResult[i]} 
+                      {this.state.transArrayResult[i] + " " + i} 
                     </Text>  
                   </Text>
                 </View>)
@@ -1029,6 +1020,7 @@ _handleNumberInput(num) {
                 return (<Picker.Item label={name} value={key} key={key}/>)
               }
             })}
+            <Picker.Item label="United States 🇺🇸" value="US" />
             <Picker.Item label="Mexico 🇲🇽" value="MX" />
             <Picker.Item label="Sweden 🇸🇪" value="SE" />
             <Picker.Item label="France 🇫🇷" value="FR" />
