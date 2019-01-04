@@ -3,6 +3,18 @@ import {
 } from 'react-native';
 
 var Style = StyleSheet.create({
+bigShadow:{
+  shadowColor:'#000',
+  shadowOffset:{ width: 0, height: 10 },
+  shadowOpacity: .3,
+  shadowRadius:20
+},
+smallShadow:{
+  shadowColor:'#000',
+  shadowOffset:{ width: 0, height: 10 },
+  shadowOpacity: .1,
+  shadowRadius:10
+},
 location: {
     backgroundColor: '#fff',
     borderRadius: 50,
@@ -14,7 +26,7 @@ location: {
     fontSize: 16,
     margin: 6,
     marginRight: 10,
-    color: '#314A9D',
+    color: '#fff',
   },
   bold: {
     fontWeight: 'bold',
@@ -29,21 +41,22 @@ location: {
     paddingTop: 10,
   },
   paneTitle:{
-    fontSize:22,
+    fontSize:24,
     fontWeight:'bold',
-    color:"white",
-    margin:5,
-    marginLeft:10,
-    marginRight:10
+    color:"#fff",
+    marginBottom:10,
+    // marginLeft:10,
+    // marginRight:10
   },
   pane:{
     justifyContent:'space-around',
     padding:10,
     paddingLeft:20,
     paddingRight:20,
-    backgroundColor:'#0002',
+    backgroundColor:'salmon',
     borderRadius:10,
-    margin:10
+    margin:10,
+    marginTop:30
   },
   container: {
     height: '100%',
@@ -86,19 +99,30 @@ location: {
     fontSize: 55,
     fontWeight: 'bold',
     paddingLeft: 10,
-    color: '#fff',
+    color: '#111',
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0,0,0,0.65)',
   },
   toolbar: {
-    backgroundColor: '#C7CCD2',
+    backgroundColor: '#D9ECFF',
     paddingVertical: 5,
     paddingHorizontal: 15,
     justifyContent:'space-between',
     alignItems:'center',
     flexDirection:'row'
+  },
+  touchTo:{
+    color:'#fda085',
+    textAlign:'center',
+    alignSelf:'center'
+  },
+  clear:{
+    opacity:0
+  },
+  view:{
+    opacity:1
   },
   listText:{
     fontSize:16,
@@ -107,19 +131,19 @@ location: {
     paddingLeft:3
   },
   hello:{
-    color:'white',
+    color:'#2C1558',
     fontSize:50,
     fontWeight:'bold'
   },
   helloForefront:{
     fontWeight:'bold',
     fontSize:35,
-    color:'white'
+    color:'#2C1558'
   },
   helloSubtext:{
     fontWeight:'300',
     fontSize:22,
-    color:'#fff9',
+    color:'#2C1558',
     padding:5,
     paddingBottom:10,
     textAlign:'center'
@@ -127,11 +151,11 @@ location: {
   helloBold:{
     fontWeight:'bold',
     // fontSize:28,
-    color:'#fff'
+    color:'#111'
   },
   helloNumbers:{
     fontWeight:'300',
-    color:'#fff9',
+    color:'#fff8',
     fontSize:22,
     width:'48%'
   },
@@ -210,30 +234,24 @@ location: {
   },
   inputButtonHighlighted: {
     backgroundColor: '#4445',
-    shadowColor:'#fff',
+    shadowColor:'#111',
     shadowOffset:{ width: 0, height: 1 },
     shadowOpacity: 1,
     shadowRadius:0
   },
   from:{
-    fontSize: 48,
+    fontSize: 42,
     fontWeight: 'bold',
     padding: 10,
-    color: '#fff',
+    color: '#2C1558',
     width:'100%',
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: {width: 0, height: 10},
-    textShadowRadius: 20
   },
   to:{
-    fontSize: 48,
+    fontSize: 42,
     fontWeight: 'bold',
     padding: 10,
-    color: '#fff9',
+    color: '#66688F',
     width:'100%',
-    textShadowColor: 'rgba(0, 0, 0, 0.2)',
-    textShadowOffset: {width: 0, height: 10},
-    textShadowRadius: 20
   },
   adjust:{
   }

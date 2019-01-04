@@ -31,8 +31,9 @@ import ClearInputButton from './ClearInputButton';
 import ratesPacket from './rates';
 import shortname from './shortname';
 import currencyPacket from './currency';
-import swapImg from './swap.png';
+// import swapImg from './swap.png';
 import { TextInput } from 'react-native-gesture-handler';
+import money from './assets/money-bill.png';
 
 const { width: WindowWidth } = Dimensions.get('window');
 
@@ -92,6 +93,18 @@ export default class App extends React.Component {
     };
   }
 
+  componentWillMount(){
+    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
+
+    if(this.state.connection || this.state.dev) { 
+      this.setState({
+        offline:1
+      })
+      this.updateCurrencyPacket('offline');
+    }else{
+      this.updateCurrencyPacket('online');
+    }
+  };
 
   getCurrentPosition = (options = {}) => {
     return new Promise((resolve, reject) => {
@@ -113,9 +126,6 @@ export default class App extends React.Component {
     } catch (error) {
 
     }
-  };
-
-  componentDidMount(){
   };
 
   _storeData = async (data) => {
@@ -152,19 +162,6 @@ export default class App extends React.Component {
     }
   };
 
-  componentWillMount(){
-    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
-
-    if(this.state.connection || this.state.dev) { 
-      this.setState({
-        offline:1
-      })
-      this.updateCurrencyPacket('offline');
-    }else{
-      this.updateCurrencyPacket('online');
-    }
-  };
-
  createMap = async () => {
     let that = this
     let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + that.state.latitude + "," + that.state.longitude + "&result_type=country&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE"
@@ -173,7 +170,9 @@ export default class App extends React.Component {
     await fetch(url)
     .then((resp) => resp.json())
     .then(function (data) {
-      let countrycode = shortname.results[data.results[0].address_components[0].short_name]
+      let countrycode = data.results[0].address_components[0].short_name
+      // let countrycode = shortname.results[data.results[0].address_components[0].short_name]
+      // console.log(data.results[0].address_components[0].short_name)
       that.setState({
         fromCountryName: data.results[0].address_components[0].long_name,
         fromCountryCode: countrycode,
@@ -209,7 +208,7 @@ export default class App extends React.Component {
   countryFromCountryCode = async () => {
     let that = this
     // await console.log(that.state.fromCountryCode)
-    console.log(that.state.fromCountryCode)
+    // console.log(that.state.fromCountryCode)
     await that.setState({ 
       toCountryEmoji: ratesPacket.results[that.state.toCountryCode].emoji,
       toCountryCurrency: ratesPacket.results[that.state.toCountryCode].currencyId,
@@ -229,8 +228,12 @@ export default class App extends React.Component {
 
   coordToCountry() {
     this.setState({
-      map: "https://maps.googleapis.com/maps/api/staticmap?center=" + this.state.latitude + "," + this.state.longitude + "&zoom=10&size=350x800&sensor=false&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0x1d2c4d&style=element:labels.text.fill%7Ccolor:0x8ec3b9&style=element:labels.text.stroke%7Ccolor:0x1a3646&style=feature:administrative.country%7Celement:geometry.stroke%7Ccolor:0x4b6878&style=feature:administrative.land_parcel%7Celement:labels.text.fill%7Ccolor:0x64779e&style=feature:administrative.province%7Celement:geometry.stroke%7Ccolor:0x4b6878&style=feature:landscape.man_made%7Celement:geometry.stroke%7Ccolor:0x334e87&style=feature:landscape.natural%7Celement:geometry%7Ccolor:0x023e58&style=feature:poi%7Celement:geometry%7Ccolor:0x283d6a&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x6f9ba5&style=feature:poi%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:poi.park%7Celement:geometry.fill%7Ccolor:0x023e58&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x3C7680&style=feature:road%7Celement:geometry%7Ccolor:0x304a7d&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x98a5be&style=feature:road%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:road.highway%7Celement:geometry%7Ccolor:0x2c6675&style=feature:road.highway%7Celement:geometry.stroke%7Ccolor:0x255763&style=feature:road.highway%7Celement:labels.text.fill%7Ccolor:0xb0d5ce&style=feature:road.highway%7Celement:labels.text.stroke%7Ccolor:0x023e58&style=feature:transit%7Celement:labels.text.fill%7Ccolor:0x98a5be&style=feature:transit%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:transit.line%7Celement:geometry.fill%7Ccolor:0x283d6a&style=feature:transit.station%7Celement:geometry%7Ccolor:0x3a4762&style=feature:water%7Celement:geometry%7Ccolor:0x0e1626&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x4e6d70&size=480x360"
+      map: "https://maps.googleapis.com/maps/api/staticmap?center=" + this.state.latitude + "," + this.state.longitude + "&zoom=10&size=350x900&sensor=false&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE&format=png"
     })
+    // console.log(this.state.map)
+    // this.setState({
+    //   map: "https://maps.googleapis.com/maps/api/staticmap?center=" + this.state.latitude + "," + this.state.longitude + "&zoom=10&size=350x800&sensor=false&key=AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0x1d2c4d&style=element:labels.text.fill%7Ccolor:0x8ec3b9&style=element:labels.text.stroke%7Ccolor:0x1a3646&style=feature:administrative.country%7Celement:geometry.stroke%7Ccolor:0x4b6878&style=feature:administrative.land_parcel%7Celement:labels.text.fill%7Ccolor:0x64779e&style=feature:administrative.province%7Celement:geometry.stroke%7Ccolor:0x4b6878&style=feature:landscape.man_made%7Celement:geometry.stroke%7Ccolor:0x334e87&style=feature:landscape.natural%7Celement:geometry%7Ccolor:0x023e58&style=feature:poi%7Celement:geometry%7Ccolor:0x283d6a&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x6f9ba5&style=feature:poi%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:poi.park%7Celement:geometry.fill%7Ccolor:0x023e58&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x3C7680&style=feature:road%7Celement:geometry%7Ccolor:0x304a7d&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x98a5be&style=feature:road%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:road.highway%7Celement:geometry%7Ccolor:0x2c6675&style=feature:road.highway%7Celement:geometry.stroke%7Ccolor:0x255763&style=feature:road.highway%7Celement:labels.text.fill%7Ccolor:0xb0d5ce&style=feature:road.highway%7Celement:labels.text.stroke%7Ccolor:0x023e58&style=feature:transit%7Celement:labels.text.fill%7Ccolor:0x98a5be&style=feature:transit%7Celement:labels.text.stroke%7Ccolor:0x1d2c4d&style=feature:transit.line%7Celement:geometry.fill%7Ccolor:0x283d6a&style=feature:transit.station%7Celement:geometry%7Ccolor:0x3a4762&style=feature:water%7Celement:geometry%7Ccolor:0x0e1626&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x4e6d70&size=480x360"
+    // })
   };
 
   readFromClipboard = async () => {   
@@ -240,7 +243,6 @@ export default class App extends React.Component {
 
   copyClipboard = async () => {
     await Clipboard.setString(this.state.quickTranslateResult);
-
   }
 
   countryToRate = async (...args) => {
@@ -304,6 +306,7 @@ export default class App extends React.Component {
       toValue: toValue.toFixed(2)
     })
   };
+
   toMath(x) {
     let newValue =  this.state.rate * x
     let toValue = x.toFixed(2)
@@ -445,7 +448,7 @@ export default class App extends React.Component {
     let fromLang = 'en';
     let toLang = this.state.lang;
     let text = this.state.transArray
-    console.log("ji")
+    // console.log("ji")
     const API_KEY = ['AIzaSyAc9BvmSaga2NJwzDn7iSn_Oz6I7Th3oIE'];
 
     if(fromLang === toLang){
@@ -454,10 +457,8 @@ export default class App extends React.Component {
       })
     }
 
-    text.map( async(word) => {
-      console.log(word)
       let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
-      url += '&q=' + encodeURI(word);
+      url += '&q=' + encodeURI(text);
       url += `&source=${fromLang}`;
       url += `&target=${toLang}`;
       
@@ -465,21 +466,19 @@ export default class App extends React.Component {
         method: 'GET',
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json"
+          Accept: "application/json",
         }
       })
       .then(res => res.json())
       .then((response) => {
-        let newArr = this.state.transArrayResult.slice()
+        let result = response.data.translations[0].translatedText.split(", ")
         
-        console.log(newArr)
+        // console.log(decodeURI("s&#39"))
 
-        newArr.push(response.data.translations[0].translatedText)
         this.setState({
-          transArrayResult: newArr
+          transArrayResult: result
         })
-        // return response.data..translations[0].translatedTex
-      })
+      // })
     })
   }
 
@@ -518,6 +517,7 @@ export default class App extends React.Component {
     .then(res => res.json())
     .then((response) => {
       let whichState = this.state.whichTranslate
+      // console.log(response)
       this.setState({
         [whichState]: response.data.translations[0].translatedText,
         whichTranslate:''
@@ -545,7 +545,7 @@ export default class App extends React.Component {
             flex: 1,
             position: 'absolute',
             width: '100%',
-            height: 800,
+            height: '100%',
             justifyContent: 'center',
           }}
           source={{ uri: this.state.map }}
@@ -554,15 +554,16 @@ export default class App extends React.Component {
         
         <LinearGradient 
           start = {[0.1, 0.1]}
-          colors = {['rgba(11, 131, 254, .5)', '#3713AE']}
+          // colors = {['rgba(11, 131, 254, .5)', '#3713AE']} DARK MODE
+          colors = {['rgba(256,256,256,0.5)','rgba(256,256,256,1)']}
           style={Style.sentence}
         >
-        
-      
           { /* FROM CURRENCY */ }
-          <View style={Style.inputs}>
+          <View 
+            style={Style.inputs}
+          >
             <TouchableOpacity
-              style={{justifyContent:'space-around', alignItems:'center',flexDirection:'row', width:'90%'}}
+              style={{justifyContent:'space-around', alignItems:'center',flexDirection:'row', width:'90%',padding:10}}
             >
               <Text
                 adjustsFontSizeToFit={true}
@@ -573,16 +574,19 @@ export default class App extends React.Component {
               >
               {this.state.fromSymbol ? this.state.fromSymbol:'$'}{" " + this.state.fromValue }
               </Text>
-              <Text style={{fontSize:48,fontWeight:'bold',color:'white'}}>{this.state.selectedSymbol}</Text>
+              <Text style={{fontSize:48,fontWeight:'bold',color:'#333'}}>{this.state.selectedSymbol}</Text>
             </TouchableOpacity>
             <Text style={Style.bold}>
               <Text>
-              <TouchableOpacity style={Style.buttons} color='rgba(121, 131, 254, 1)' onPress={this._handlePressOpenFrom}>
-              <View style={Style.location}>
+              <TouchableOpacity style={Style.buttons} color='#fff' onPress={this._handlePressOpenFrom}>
+              <LinearGradient 
+                start = {[0.1, 0.1]}
+                colors = {['#41DFA0','#47DEAA']}
+                style={[Style.location, Style.smallShadow]}>
                 <Text style={Style.subtext}>
                   {this.countryEmoji('fromCountryEmoji') + " " + this.state.fromCountryCurrencyName}
                 </Text>
-              </View>
+              </LinearGradient>
               </TouchableOpacity>
               </Text>
             </Text>
@@ -603,12 +607,15 @@ export default class App extends React.Component {
         </TouchableOpacity>
             <Text style={Style.bold}>
               <Text>
-              <TouchableOpacity style={Style.buttons} color='rgba(121, 131, 254, 1)' onPress={this._handlePressOpenTo}>
-              <View style={Style.location}>
+              <TouchableOpacity style={Style.buttons} color='#fff' onPress={this._handlePressOpenTo}>
+              <LinearGradient 
+                start = {[0.1, 0.1]}
+                colors = {['#41DFA0','#47DEAA']}
+                style={[Style.location, Style.smallShadow]}>
                 <Text style={Style.subtext}>
                   {this.countryEmoji('toCountryEmoji')? this.countryEmoji('toCountryEmoji') : null}{" " + this.state.toCountryCurrencyName}
                 </Text>
-              </View>
+              </LinearGradient>
               </TouchableOpacity>
               </Text>
             </Text>
@@ -643,7 +650,7 @@ export default class App extends React.Component {
         
         <LinearGradient 
           start = {[0.1, 0.1]}
-          colors = {['rgba(11, 131, 254, .5)', '#3713AE']}
+          colors = {['rgba(256,256,256,0.6)','rgba(256,256,256,8)']}
           style={Style.sentence}
         >
           <View style={Style.inputs}>
@@ -665,8 +672,20 @@ export default class App extends React.Component {
                 {this.state.fromCountryName + " " + this.state.fromCountryEmoji}
               </Text>
             </View>
-            <Text style={Style.paneTitle}>{this.state.fromSymbol + " " + this.state.fromCountryCurrencyName}</Text>
-            <View style={Style.pane}>
+            <LinearGradient 
+              start = {[0.1, 0.1]}
+              colors = {['#41DFA0','#47DEAA']}
+              style={[Style.pane, Style.smallShadow]}
+            >
+              <View
+                style={{flexDirection:'row'}}  
+              >
+                <Image
+                  source={require('./assets/money-bill.png')}
+                  style={{height:25,width:38,marginRight:12}}
+                />
+                <Text style={Style.paneTitle}>{this.state.fromSymbol + " " + this.state.fromCountryCurrencyName}</Text>
+              </View>
               {[1,5,10,25].map((num) => {
                 return(
                 <View 
@@ -698,9 +717,21 @@ export default class App extends React.Component {
                   </Text>
                 </View>)
               })}
+            </LinearGradient>
+            <LinearGradient 
+              start = {[0.1, 0.1]}
+              colors = {['#6574F8','#868EFF']}
+              style={[Style.pane, Style.smallShadow]}
+            >
+            <View
+              style={{flexDirection:'row'}}  
+            >
+              <Image
+                source={require('./assets/language.png')}
+                style={{height:25,width:38,marginRight:12}}
+              />
+              <Text style={Style.paneTitle}>{this.state.longLang}</Text>
             </View>
-            <Text style={Style.paneTitle}>{this.state.longLang}</Text>
-            <View style={Style.pane}>
               {this.state.transArray.map((trans,i) => {
                 return(
                 <View 
@@ -723,12 +754,12 @@ export default class App extends React.Component {
                     style={Style.helloNumbers}
                   >
                     <Text style={{color:'white',fontWeight:'bold'}}>
-                      {this.state.transArrayResult[i] + " " + i} 
+                      {this.state.transArrayResult[i]} 
                     </Text>  
                   </Text>
                 </View>)
               })}
-            </View>
+            </LinearGradient>
           </View>  
         </LinearGradient>
       </View>
@@ -749,31 +780,35 @@ export default class App extends React.Component {
         
         <LinearGradient 
           start = {[0.1, 0.1]}
-          colors = {['rgba(11, 131, 254, .5)', '#3713AE']}
+          colors = {['rgba(256,256,256,0.6)','rgba(256,256,256,8)']}
           style={Style.sentence}
         >
           <View style={Style.inputs}>
             <View style={{padding:10}}>
-              <View>
-                  <Text 
-                    style={Style.hello}
-                    adjustsFontSizeToFit={true}
-                    numberOfLines={1}
-                    minimumFontScale={0.01}
-                  >
+              <LinearGradient 
+                start = {[0.1, 0.1]}
+                colors = {['#6574F8','#868EFF']}
+                style={[Style.pane, Style.smallShadow]}
+              >
+                <Text 
+                  style={{color:'#fff',fontSize:50,fontWeight:'bold'}}
+                  adjustsFontSizeToFit={true}
+                  numberOfLines={1}
+                  minimumFontScale={0.01}
+                >
                   Translate into {this.state.longLang + " " + this.countryEmoji('fromCountryEmoji') }
                 </Text>
-              <TextInput
-                style={{borderWidth:1,borderRadius:5,borderColor:'#fff3',color:'#fff9',fontSize:20,padding:7,margin:5}}
-                onChangeText={(quickTranslate) => {this.setState({quickTranslate}); this.translateQuick(); } }
-                value={this.state.quickTranslate}
-                multiline={true}
-                numberOfLines={2}
-                editable = {true}
-                placeholderTextColor="#fff3"
-                placeholder="hello"
-              />
-              </View>
+                <TextInput
+                  style={{borderWidth:1,borderRadius:5,borderColor:'#fff8',color:'#fff',fontSize:20,padding:7,marginTop:7,marginBottom:5}}
+                  onChangeText={(quickTranslate) => {this.setState({quickTranslate}); this.translateQuick(); } }
+                  value={this.state.quickTranslate}
+                  multiline={true}
+                  numberOfLines={2}
+                  editable = {true}
+                  placeholderTextColor="#fff8"
+                  placeholder="hello"
+                />
+              </LinearGradient>
               <TouchableOpacity
                 onPress={this.copyClipboard}
               >
@@ -786,7 +821,7 @@ export default class App extends React.Component {
                   {this.state.quickTranslateResult}
                 </Text>
               </TouchableOpacity>
-              <Text style={{color:'#fff5',textAlign:'center',alignSelf:'center'}}>Touch to copy to clipboard</Text>
+              <Text style={[Style.touchTo, this.quickTranslate ? Style.view : Style.clear]}>Touch to copy to clipboard</Text>
             </View> 
           </View>  
         </LinearGradient>
